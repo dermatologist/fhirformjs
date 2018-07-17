@@ -7,12 +7,22 @@ const fhirformjs = (fhirjson) => {
   items.forEach((item) => {
     buff = item;
     buff.title = item.text;
-    if (item.type === 'text')
+    const item_type = item.type.toLowerCase();
+    if (item_type === 'string')
       buff.type = 'string';
-    if (item.type === 'open-choice')
+    if (item_type === 'number')
+      buff.type = 'number';
+    if (item_type === 'choice')
+      buff.type = 'string';
+    if (item_type === 'boolean')
+      buff.type = 'string';
+    if (item_type === 'date')
+      buff.type = 'string';
+    if (item_type === 'group')
       buff.type = 'string';
     toReturn.push(buff)
   })
+
 
   return toReturn;
 };
