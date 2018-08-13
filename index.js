@@ -8,21 +8,36 @@
     items.forEach((item) => {
         buff = item;
         buff.title = item.text;
-        buff.id = item.linkId;
+        buff.description = "";
+        buff.$id = item.linkId;
         buff.system = item.code.system;
         buff.code = item.code.code;
         buff.options = item.options.reference;
         const item_type = item.type.toLowerCase();
-        if (item_type === 'string')
+        if (item_type === 'string') {
             buff.type = 'string';
-        if (item_type === 'number')
+            buff.default = '';
+            buff.minLength = 0;
+            buff.maxLength = 9999;
+        }
+        if (item_type === 'number') {
             buff.type = 'number';
-        if (item_type === 'choice')
+            buff.default = 0;
+            buff.minimum = 0;
+            buff.maximum = 9999;
+        }
+        if (item_type === 'choice') {
             buff.type = 'string';
-        if (item_type === 'boolean')
+            buff.enum = [];
+        }
+        if (item_type === 'boolean') {
             buff.type = 'boolean';
-        if (item_type === 'date')
+            buff.default = false;
+        }
+        if (item_type === 'date') {
             buff.type = 'string';
+            buff.format = "date-time";
+        }
         if (item_type === 'group')
             buff.type = 'string';
         toReturn.push(buff)
