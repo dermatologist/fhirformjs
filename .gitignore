@@ -3,3 +3,4 @@ coverage
 
 .idea
 .nyc_output
+.vs
