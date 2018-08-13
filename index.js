@@ -1,47 +1,70 @@
 ﻿const fhirformjs = (fhirjson) => {
     // Your code goes here
     const items = fhirjson.item;
-    const resources = fhirjson.contained;
+
+  // let FhirContained = null;
+  // if (fhirjson.contained !== undefined)
+  //   FhirContained = fhirjson.contained;
+
     let buff = null;
     const toReturn = [];
 
     items.forEach((item) => {
+      if (item !== undefined)
         buff = item;
+      if (item.text !== undefined)
         buff.title = item.text;
+
         buff.description = "";
+
+      if (item.linkId !== undefined)
         buff.$id = item.linkId;
+
+      if (item !== undefined && item.code !== undefined && item.code.system !== undefined)
         buff.system = item.code.system;
+      if (item !== undefined && item.code !== undefined && item.code.code !== undefined)
         buff.code = item.code.code;
+      if (item !== undefined && item.options !== undefined && item.options.reference !== undefined)
         buff.options = item.options.reference;
-        const item_type = item.type.toLowerCase();
-        if (item_type === 'string') {
+
+      const ItemType = item.type.toLowerCase();
+
+
+      if (ItemType === 'text') {
+        buff.type = 'string';
+        buff.default = '';
+        buff.minLength = 0;
+        buff.maxLength = 9999;
+      }
+      if (ItemType === 'string') {
             buff.type = 'string';
             buff.default = '';
             buff.minLength = 0;
             buff.maxLength = 9999;
         }
-        if (item_type === 'number') {
+
+      if (ItemType === 'number') {
             buff.type = 'number';
             buff.default = 0;
             buff.minimum = 0;
             buff.maximum = 9999;
         }
-        if (item_type === 'choice') {
+      if (ItemType === 'choice') {
             buff.type = 'string';
             buff.enum = [];
         }
-        if (item_type === 'boolean') {
+      if (ItemType === 'boolean') {
             buff.type = 'boolean';
             buff.default = false;
         }
-        if (item_type === 'date') {
+      if (ItemType === 'date') {
             buff.type = 'string';
             buff.format = "date-time";
         }
-        if (item_type === 'group')
+      if (ItemType === 'group')
             buff.type = 'string';
         toReturn.push(buff)
-    })
+    });
 
 
     return toReturn;
