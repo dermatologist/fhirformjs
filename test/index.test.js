@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const fetch = require('isomorphic-fetch');
-const Fhirformjs = require('../index');
+const Fhirformjs = require('../src/index');
 
 describe('fhirformjs', () => {
   it('should work as expected', () => {
