@@ -24,7 +24,7 @@
         buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].default = "";
             buff_schema.properties[item.linkId].minLength = 0;
-            buff_schema.properties[item.linkId].maxLength = 9999;
+        buff_schema.properties[item.linkId].maxLength = 50;
       }
 
       if (ItemType === 'string') {
@@ -50,12 +50,12 @@
 
       if (ItemType === 'choice') {
             buff_schema.properties[item.linkId].type = 'string';
-            buff_schema.properties[item.linkId].enum = [];
+        buff_schema.properties[item.linkId].enum = ['one', 'two'];
       }
 
       if (ItemType === 'open-choice') {
             buff_schema.properties[item.linkId].type = 'string';
-            buff_schema.properties[item.linkId].enum = [];
+        buff_schema.properties[item.linkId].enum = ['one', 'two'];
       }
 
       if (ItemType === 'boolean') {
