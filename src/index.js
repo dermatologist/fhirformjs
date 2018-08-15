@@ -8,15 +8,16 @@
 
     let to_return = {};
     let buff_schema = {};
-    let buff_ui = {};
+  let buff_ui = null;
 
-    items.forEach((item) => {
+  buff_schema.type = 'object';
+  buff_schema.properties = {};
 
-      buff_schema.type = "object";
+  items.forEach((item) => {
+
 
       const ItemType = item.type.toLowerCase();
 
-      buff_schema.properties = {};
       buff_schema.properties[item.linkId] = {};
 
       if (ItemType === 'text') {
