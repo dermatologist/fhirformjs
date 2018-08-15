@@ -16,16 +16,18 @@
 
       const ItemType = item.type.toLowerCase();
 
+      buff_schema.properties = {};
+      buff_schema.properties[item.linkId] = {};
 
       if (ItemType === 'text') {
-            buff_schema.properties[item.linkId].type = "string"
+        buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].default = "";
             buff_schema.properties[item.linkId].minLength = 0;
             buff_schema.properties[item.linkId].maxLength = 9999;
       }
 
       if (ItemType === 'string') {
-            buff_schema.properties[item.linkId].type = "string"
+        buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].default = "";
             buff_schema.properties[item.linkId].minLength = 0;
             buff_schema.properties[item.linkId].maxLength = 50;
@@ -37,7 +39,7 @@
             buff_schema.properties[item.linkId].minimum = 0;
             buff_schema.properties[item.linkId].maximum = 9999;
       }
-      
+
       if (ItemType === 'integer') {
             buff_schema.properties[item.linkId].type = 'integer';
             buff_schema.properties[item.linkId].default = 0;
@@ -49,7 +51,7 @@
             buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].enum = [];
       }
-      
+
       if (ItemType === 'open-choice') {
             buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].enum = [];
@@ -59,12 +61,12 @@
             buff_schema.properties[item.linkId].type = 'boolean';
             buff_schema.default = false;
       }
-      
+
       if (ItemType === 'date') {
             buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].format = "date";
       }
-      
+
       if (ItemType === 'dateTime') {
             buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].format = "date-time";
@@ -74,7 +76,7 @@
             buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].format = "date-time";
       }
- 
+
       if (ItemType === 'time') {
             buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].format = "date-time";
@@ -87,7 +89,7 @@
       if (ItemType === 'group'){
 
       }
-      
+
       if (ItemType === 'display'){
 
       }
