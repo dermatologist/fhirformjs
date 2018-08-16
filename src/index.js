@@ -6,12 +6,16 @@
   // if (fhirjson.contained !== undefined)
   //   FhirContained = fhirjson.contained;
 
-    let to_return = {};
-    let buff_schema = {};
-  let buff_ui = null;
+  let to_return = {};
+  let buff_schema = {};
+  let buff_ui = {};
+  let buff_ui_element = {};
 
   buff_schema.type = 'object';
   buff_schema.properties = {};
+
+  buff_ui.type = "VerticalLayout";
+  buff_ui.elements = [];
 
   items.forEach((item) => {
 
@@ -20,11 +24,21 @@
 
       buff_schema.properties[item.linkId] = {};
 
+      buff_ui_element = {};
+      buff_ui_element.type = "Control";
+      buff_ui_element.scope = "#/properties/" + item.linkId;
+
+      if (item.text !== undefined)
+          buff_ui_element.label = item.text;
+      else if (item.code.code != undefined)
+          buff_ui_element.label = item.code.code
+
+
       if (ItemType === 'text') {
-        buff_schema.properties[item.linkId].type = 'string';
+            buff_schema.properties[item.linkId].type = 'string';
             buff_schema.properties[item.linkId].default = "";
             buff_schema.properties[item.linkId].minLength = 0;
-        buff_schema.properties[item.linkId].maxLength = 50;
+            buff_schema.properties[item.linkId].maxLength = 50;
       }
 
       if (ItemType === 'string') {
@@ -109,6 +123,8 @@
       }
 
     });
+
+    buff_ui.elements.push(buff_ui_element);
 
     to_return.schema = buff_schema;
     to_return.ui = buff_ui;
