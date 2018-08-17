@@ -9,6 +9,7 @@
   let to_return = {};
   let buff_schema = {};
   let buff_ui = {};
+  let buff_data = {};
   let buff_ui_element = {};
 
   buff_schema.type = 'object';
@@ -123,6 +124,20 @@
       }
 
 
+      // Process data
+
+      if(item.answer.valueString !== undefined)
+        buff_data[item.linkId] = item.answer.valueString;
+      if(item.answer.valueDate !== undefined)
+        buff_data[item.linkId] = item.answer.valueDate;
+      if(item.answer.valueBoolean !== undefined)
+        buff_data[item.linkId] = item.answer.valueBolean;
+      if(item.answer.valueInteger !== undefined)
+        buff_data[item.linkId] = item.answer.valueInteger;
+      if(item.answer.valueChoice !== undefined)
+        buff_data[item.linkId] = item.answer.valueChoice;
+
+
     buff_ui.elements.push(buff_ui_element);
 
   });
@@ -130,6 +145,7 @@
 
     to_return.schema = buff_schema;
     to_return.ui = buff_ui;
+    to_return.data = buff_data;
 
     return to_return;
 };
