@@ -7,7 +7,9 @@ describe('fhirformjs', () => {
     fetch('http://hapi.fhir.org/baseDstu3/Questionnaire/sickKids/_history/3?_format=json')
       .then((response) => response.json())
       .then((myJson) => {
-        console.log(Fhirformjs.fhirformjs(myJson));
+        const ff = Fhirformjs.fhirformjs(myJson);
+        console.log(ff.schema);
+        console.log(ff.ui);
       });
   });
 });

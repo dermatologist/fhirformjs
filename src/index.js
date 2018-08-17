@@ -31,7 +31,7 @@
       if (item.text !== undefined)
           buff_ui_element.label = item.text;
       else if (item.code.code != undefined)
-          buff_ui_element.label = item.code.code
+        buff_ui_element.label = item.code.code;
 
 
       if (ItemType === 'text') {
@@ -122,9 +122,11 @@
           buff_schema.properties[item.linkId].maximum = 9999;
       }
 
-    });
 
     buff_ui.elements.push(buff_ui_element);
+
+  });
+
 
     to_return.schema = buff_schema;
     to_return.ui = buff_ui;
