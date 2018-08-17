@@ -125,18 +125,18 @@
 
 
       // Process data
-
-      if(item.answer.valueString !== undefined)
+    if (item.answer !== undefined) {
+      if (item.answer.valueString !== undefined)
         buff_data[item.linkId] = item.answer.valueString;
-      if(item.answer.valueDate !== undefined)
+      if (item.answer.valueDate !== undefined)
         buff_data[item.linkId] = item.answer.valueDate;
-      if(item.answer.valueBoolean !== undefined)
+      if (item.answer.valueBoolean !== undefined)
         buff_data[item.linkId] = item.answer.valueBolean;
-      if(item.answer.valueInteger !== undefined)
+      if (item.answer.valueInteger !== undefined)
         buff_data[item.linkId] = item.answer.valueInteger;
-      if(item.answer.valueChoice !== undefined)
+      if (item.answer.valueChoice !== undefined)
         buff_data[item.linkId] = item.answer.valueChoice;
-
+    }
 
     buff_ui.elements.push(buff_ui_element);
 
