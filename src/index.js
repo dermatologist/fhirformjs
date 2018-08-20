@@ -131,7 +131,7 @@
       if (item.answer.valueDate !== undefined)
         buffData[item.linkId] = item.answer.valueDate;
       if (item.answer.valueBoolean !== undefined)
-        buffData[item.linkId] = item.answer.valueBolean;
+        buffData[item.linkId] = item.answer.valueBoolean;
       if (item.answer.valueInteger !== undefined)
         buffData[item.linkId] = item.answer.valueInteger;
       if (item.answer.valueChoice !== undefined)
@@ -151,10 +151,44 @@
 };
 
 const fhirformResp = (fhirjson, resp) => {
-  const toReturn = {};
-  toReturn.fhirjson = fhirjson;
-  toReturn.resp = resp;
-  return toReturn;
+
+  const items = fhirjson.item;
+
+  items.forEach((item) => {
+      const ItemType = item.type.toLowerCase();
+
+      if (ItemType === 'string') {
+        item.answer = {};
+        item.answer.valueString = resp[item.linkId];
+      }
+
+      if (ItemType === 'text') {
+        item.answer = {};
+        item.answer.valueString = resp[item.linkId];
+      }
+
+      if (ItemType === 'integer') {
+        item.answer = {};
+        item.answer.valueInteger = resp[item.linkId];
+      }
+
+      if (ItemType === 'date') {
+        item.answer = {};
+        item.answer.valueDate = resp[item.linkId];
+      }
+      if (ItemType === 'boolean') {
+        item.answer = {};
+        item.answer.valueBoolean = resp[item.linkId];
+      }
+      if (ItemType === 'choice') {
+        item.answer = {};
+        item.answer.valueChoice = resp[item.linkId];
+      }
+  });
+
+  fhirjson.item = items;
+
+  return fhirjson;
 
 };
 module.exports = { fhirformjs, fhirformResp };
