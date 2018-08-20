@@ -18,8 +18,7 @@ describe('fhirformjs', () => {
       .then((response) => response.json())
       .then((myJson) => {
         const ff = Fhirformjs.fhirformResp(myJson, {});
-        console.log(ff.fhirjson);
-        console.log(ff.resp);
+        console.log(ff);
       });
   });
 });
