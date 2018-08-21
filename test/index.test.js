@@ -19,6 +19,10 @@ describe('fhirformjs', () => {
       .then((myJson) => {
         const ff = Fhirformjs.fhirformResp(myJson, {});
         console.log(ff);
+        for (var key in ff) {
+          var value = ff[key];
+          console.log(value);
+        }
       });
   });
 });

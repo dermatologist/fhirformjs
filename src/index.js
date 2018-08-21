@@ -22,7 +22,7 @@
 
 
     const ItemType = item.type.toLowerCase();
-    let itemLinkId = item.linkId.replace(".", "___");
+    const itemLinkId = item.linkId.replace(/\./g, '___');
 
     buffSchema.properties[itemLinkId] = {};
 
@@ -157,8 +157,8 @@ const fhirformResp = (fhirjson, resp) => {
 
   items.forEach((item) => {
       const ItemType = item.type.toLowerCase();
-      let itemLinkId = item.linkId.replace(".", "___");
-      
+    const itemLinkId = item.linkId.replace(/\./g, '___');
+
       if (ItemType === 'string') {
         item.answer = {};
         item.answer.valueString = resp[itemLinkId];
