@@ -21,13 +21,14 @@
   items.forEach((item) => {
 
 
-      const ItemType = item.type.toLowerCase();
+    const ItemType = item.type.toLowerCase();
+    let itemLinkId = item.linkId.replace(".", "___");
 
-    buffSchema.properties[item.linkId] = {};
+    buffSchema.properties[itemLinkId] = {};
 
     buffUiElement = {};
     buffUiElement.type = 'Control';
-    buffUiElement.scope = '#/properties/' + item.linkId;
+    buffUiElement.scope = '#/properties/' + itemLinkId;
 
       if (item.text !== undefined)
         buffUiElement.label = item.text;
@@ -36,70 +37,70 @@
 
 
       if (ItemType === 'text') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].default = '';
-        buffSchema.properties[item.linkId].minLength = 0;
-        buffSchema.properties[item.linkId].maxLength = 50;
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].default = '';
+        buffSchema.properties[itemLinkId].minLength = 0;
+        buffSchema.properties[itemLinkId].maxLength = 50;
       }
 
       if (ItemType === 'string') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].default = '';
-        buffSchema.properties[item.linkId].minLength = 0;
-        buffSchema.properties[item.linkId].maxLength = 50;
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].default = '';
+        buffSchema.properties[itemLinkId].minLength = 0;
+        buffSchema.properties[itemLinkId].maxLength = 50;
       }
 
       if (ItemType === 'decimal') {
-        buffSchema.properties[item.linkId].type = 'number';
-        buffSchema.properties[item.linkId].default = 0;
-        buffSchema.properties[item.linkId].minimum = 0;
-        buffSchema.properties[item.linkId].maximum = 9999;
+        buffSchema.properties[itemLinkId].type = 'number';
+        buffSchema.properties[itemLinkId].default = 0;
+        buffSchema.properties[itemLinkId].minimum = 0;
+        buffSchema.properties[itemLinkId].maximum = 9999;
       }
 
       if (ItemType === 'integer') {
-        buffSchema.properties[item.linkId].type = 'integer';
-        buffSchema.properties[item.linkId].default = 0;
-        buffSchema.properties[item.linkId].minimum = 0;
-        buffSchema.properties[item.linkId].maximum = 9999;
+        buffSchema.properties[itemLinkId].type = 'integer';
+        buffSchema.properties[itemLinkId].default = 0;
+        buffSchema.properties[itemLinkId].minimum = 0;
+        buffSchema.properties[itemLinkId].maximum = 9999;
       }
 
       if (ItemType === 'choice') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].enum = ['one', 'two'];
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
       }
 
       if (ItemType === 'open-choice') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].enum = ['one', 'two'];
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
       }
 
       if (ItemType === 'boolean') {
-        buffSchema.properties[item.linkId].type = 'boolean';
+        buffSchema.properties[itemLinkId].type = 'boolean';
         buffSchema.default = false;
       }
 
       if (ItemType === 'date') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].format = 'date';
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].format = 'date';
       }
 
       if (ItemType === 'dateTime') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].format = 'date-time';
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].format = 'date-time';
       }
 
       if (ItemType === 'dateTime') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].format = 'date-time';
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].format = 'date-time';
       }
 
       if (ItemType === 'time') {
-        buffSchema.properties[item.linkId].type = 'string';
-        buffSchema.properties[item.linkId].format = 'date-time';
+        buffSchema.properties[itemLinkId].type = 'string';
+        buffSchema.properties[itemLinkId].format = 'date-time';
       }
 
       if (ItemType === 'url') {
-        buffSchema.properties[item.linkId].type = 'string';
+        buffSchema.properties[itemLinkId].type = 'string';
       }
 
       if (ItemType === 'group'){
@@ -117,25 +118,25 @@
       }
 
       if (ItemType === 'quantity'){
-        buffSchema.properties[item.linkId].type = 'decimal';
-        buffSchema.properties[item.linkId].default = 0;
-        buffSchema.properties[item.linkId].minimum = 0;
-        buffSchema.properties[item.linkId].maximum = 9999;
+        buffSchema.properties[itemLinkId].type = 'decimal';
+        buffSchema.properties[itemLinkId].default = 0;
+        buffSchema.properties[itemLinkId].minimum = 0;
+        buffSchema.properties[itemLinkId].maximum = 9999;
       }
 
 
       // Process data
     if (item.answer !== undefined) {
       if (item.answer.valueString !== undefined)
-        buffData[item.linkId] = item.answer.valueString;
+        buffData[itemLinkId] = item.answer.valueString;
       if (item.answer.valueDate !== undefined)
-        buffData[item.linkId] = item.answer.valueDate;
+        buffData[itemLinkId] = item.answer.valueDate;
       if (item.answer.valueBoolean !== undefined)
-        buffData[item.linkId] = item.answer.valueBoolean;
+        buffData[itemLinkId] = item.answer.valueBoolean;
       if (item.answer.valueInteger !== undefined)
-        buffData[item.linkId] = item.answer.valueInteger;
+        buffData[itemLinkId] = item.answer.valueInteger;
       if (item.answer.valueChoice !== undefined)
-        buffData[item.linkId] = item.answer.valueChoice;
+        buffData[itemLinkId] = item.answer.valueChoice;
     }
 
     buffUi.elements.push(buffUiElement);
@@ -156,33 +157,34 @@ const fhirformResp = (fhirjson, resp) => {
 
   items.forEach((item) => {
       const ItemType = item.type.toLowerCase();
-
+      let itemLinkId = item.linkId.replace(".", "___");
+      
       if (ItemType === 'string') {
         item.answer = {};
-        item.answer.valueString = resp[item.linkId];
+        item.answer.valueString = resp[itemLinkId];
       }
 
       if (ItemType === 'text') {
         item.answer = {};
-        item.answer.valueString = resp[item.linkId];
+        item.answer.valueString = resp[itemLinkId];
       }
 
       if (ItemType === 'integer') {
         item.answer = {};
-        item.answer.valueInteger = resp[item.linkId];
+        item.answer.valueInteger = resp[itemLinkId];
       }
 
       if (ItemType === 'date') {
         item.answer = {};
-        item.answer.valueDate = resp[item.linkId];
+        item.answer.valueDate = resp[itemLinkId];
       }
       if (ItemType === 'boolean') {
         item.answer = {};
-        item.answer.valueBoolean = resp[item.linkId];
+        item.answer.valueBoolean = resp[itemLinkId];
       }
       if (ItemType === 'choice') {
         item.answer = {};
-        item.answer.valueChoice = resp[item.linkId];
+        item.answer.valueChoice = resp[itemLinkId];
       }
   });
 
