@@ -1,16 +1,15 @@
 {
   "name": "fhirformjs",
-  "description": "FHIR Questionnaire Render",
-  "version": "0.0.0",
-  "dependencies": {
-    "es6-promise": "^4.2.4",
-    "isomorphic-fetch": "^2.2.1"
-  },
+  "description": "FHIR Questionnaire To Json Schema Converter",
+  "version": "0.0.1",
+  "dependencies": {},
+  "main": "./lib",
   "scripts": {
+    "build": "babel src --out-dir lib",
     "lint": "eslint -f unix .",
     "inspect": "jsinspect",
     "prettier": "prettier --list-different \"./**/**.js\"",
-    "pretest": "npm run lint && npm run inspect && npm run prettier",
+    "pretest": "npm run lint && npm run inspect",
     "test": "nyc mocha",
     "posttest": "nyc check-coverage --statements 90 --branches 90 --functions 90 --lines 90"
   },
@@ -24,10 +23,16 @@
     "url": "git@github.com:dermatologist/fhirformjs.git"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
+    "es6-promise": "^4.2.4",
     "eslint": "^4.17.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.8.0",
+    "isomorphic-fetch": "^2.2.1",
     "jsinspect": "^0.12.7",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
