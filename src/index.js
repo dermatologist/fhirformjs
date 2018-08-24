@@ -83,8 +83,15 @@
       }
 
       if (ItemType === 'open-choice') {
-        buffSchema.properties[itemLinkId].type = 'string';
-        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+        buffSchema.properties[itemLinkId].type = 'checkboxes';
+        buffSchema.properties[itemLinkId].titleMap = {};
+        buffSchema.properties[itemLinkId].titleMap.one = "one";
+        buffSchema.properties[itemLinkId].titleMap.two = "two";
+        buffSchema.properties[itemLinkId].titleMap.otherField = {};
+        buffSchema.properties[itemLinkId].titleMap.otherField.key = "menu2Other";
+        buffSchema.properties[itemLinkId].titleMap.otherField.title = "Custom other field title";
+        buffSchema.properties[itemLinkId].titleMap.otherField.otherValue = "CUSTOME_OTHER_VALUE";
+
       }
 
       if (ItemType === 'boolean') {
