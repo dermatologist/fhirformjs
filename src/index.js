@@ -32,9 +32,10 @@
 
       if (item.text !== undefined)
         buffUiElement.label = item.text;
+      else if (item.code.display != undefined)
+        buffUiElement.label = item.code.display;
       else if (item.code.code != undefined)
         buffUiElement.label = item.code.code;
-
 
       if (ItemType === 'text') {
         buffSchema.properties[itemLinkId].type = 'string';
@@ -66,7 +67,19 @@
 
       if (ItemType === 'choice') {
         buffSchema.properties[itemLinkId].type = 'string';
-        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+        let _enum = [];
+        if(item.option !== undefined){
+          item.option.forEach(element => {
+            if(element.valueCoding !== undefined && element.valueCoding.code !== undefined)
+              _enum.push(element.valueCoding.code);
+          });
+        }
+        if (_enum === undefined || _enum.length == 0) {
+          // array empty or does not exist
+          buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+        }else{
+          buffSchema.properties[itemLinkId].enum = _enum;
+        }
       }
 
       if (ItemType === 'open-choice') {
