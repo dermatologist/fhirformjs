@@ -28,13 +28,13 @@
 
     buffUiElement = {};
     buffUiElement.type = 'Control';
-    buffUiElement.scope = '#/properties/' + itemLinkId;
+    buffUiElement.scope = `#/properties/${  itemLinkId}`;
 
       if (item.text !== undefined)
         buffUiElement.label = item.text;
-      else if (item.code.display != undefined)
+      else if (item.code.display !== undefined)
         buffUiElement.label = item.code.display;
-      else if (item.code.code != undefined)
+      else if (item.code.code !== undefined)
         buffUiElement.label = item.code.code;
 
       if (ItemType === 'text') {
@@ -67,18 +67,18 @@
 
       if (ItemType === 'choice') {
         buffSchema.properties[itemLinkId].type = 'string';
-        let _enum = [];
+        const ffEnum = [];
         if(item.option !== undefined){
           item.option.forEach(element => {
             if(element.valueCoding !== undefined && element.valueCoding.code !== undefined)
-              _enum.push(element.valueCoding.code);
+              ffEnum.push(element.valueCoding.code);
           });
         }
-        if (_enum === undefined || _enum.length == 0) {
+        if (ffEnum === undefined || ffEnum.length === 0) {
           // array empty or does not exist
           buffSchema.properties[itemLinkId].enum = ['one', 'two'];
         }else{
-          buffSchema.properties[itemLinkId].enum = _enum;
+          buffSchema.properties[itemLinkId].enum = ffEnum;
         }
       }
 
@@ -123,17 +123,17 @@
         buffSchema.properties[itemLinkId].type = 'string';
       }
 
-      if (ItemType === 'group'){
+      if (ItemType === 'group') {
 
       }
 
-      if (ItemType === 'display'){
+      if (ItemType === 'display') {
 
       }
-      if (ItemType === 'attachment'){
+      if (ItemType === 'attachment') {
 
       }
-      if (ItemType === 'reference'){
+      if (ItemType === 'reference') {
 
       }
 
