@@ -6,13 +6,12 @@ This is an npm module to convert a FHIR Questionnaire to jsonForm for automatic 
 
 ## Installation
 
-This has not been added to npm yet. Use github for now as below:
+    npm i --save fhirformjs
+
+Use github for latest dev branch:
 
     npm install --save github:dermatologist/fhirformjs#develop
 
-Later:
-
-    npm install --save fhirformjs
 
 ## Usage
 
