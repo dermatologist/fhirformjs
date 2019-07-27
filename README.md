@@ -18,7 +18,7 @@ npm install --save fhirformjs
 
 ## Usage
 
-See [this repo](https://github.com/dermatologist/fhir-questionnaire-render-react) to see the usage. Specifically [this file](https://github.com/dermatologist/fhir-questionnaire-render-react/blob/develop/src/containers/FhirFormContainer.js).
+See [this repo](https://github.com/dermatologist/fhir-questionnaire-render-react) to see the usage. Specifically [this file](https://github.com/dermatologist/fhir-questionnaire-render-react/blob/develop/src/containers/FhirFormContainer.js). The meta-repository of FHIRForm framework and resources is [here](https://github.com/E-Health/fhirform).
 
 ## Credits
 [Bell Eapen](http://nuchange.ca/) | McMaster U

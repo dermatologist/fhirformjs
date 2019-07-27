@@ -28,13 +28,14 @@
 
     buffUiElement = {};
     buffUiElement.type = 'Control';
-    buffUiElement.scope = '#/properties/' + itemLinkId;
+    buffUiElement.scope = `#/properties/${  itemLinkId}`;
 
       if (item.text !== undefined)
         buffUiElement.label = item.text;
-      else if (item.code.code != undefined)
+      else if (item.code.display !== undefined)
+        buffUiElement.label = item.code.display;
+      else if (item.code.code !== undefined)
         buffUiElement.label = item.code.code;
-
 
       if (ItemType === 'text') {
         buffSchema.properties[itemLinkId].type = 'string';
@@ -66,12 +67,31 @@
 
       if (ItemType === 'choice') {
         buffSchema.properties[itemLinkId].type = 'string';
-        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+        const ffEnum = [];
+        if(item.option !== undefined){
+          item.option.forEach(element => {
+            if(element.valueCoding !== undefined && element.valueCoding.code !== undefined)
+              ffEnum.push(element.valueCoding.code);
+          });
+        }
+        if (ffEnum === undefined || ffEnum.length === 0) {
+          // array empty or does not exist
+          buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+        }else{
+          buffSchema.properties[itemLinkId].enum = ffEnum;
+        }
       }
 
       if (ItemType === 'open-choice') {
-        buffSchema.properties[itemLinkId].type = 'string';
-        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+        buffSchema.properties[itemLinkId].type = 'checkboxes';
+        buffSchema.properties[itemLinkId].titleMap = {};
+        buffSchema.properties[itemLinkId].titleMap.one = "one";
+        buffSchema.properties[itemLinkId].titleMap.two = "two";
+        buffSchema.properties[itemLinkId].titleMap.otherField = {};
+        buffSchema.properties[itemLinkId].titleMap.otherField.key = "menu2Other";
+        buffSchema.properties[itemLinkId].titleMap.otherField.title = "Custom other field title";
+        buffSchema.properties[itemLinkId].titleMap.otherField.otherValue = "CUSTOME_OTHER_VALUE";
+
       }
 
       if (ItemType === 'boolean') {
@@ -103,17 +123,17 @@
         buffSchema.properties[itemLinkId].type = 'string';
       }
 
-      if (ItemType === 'group'){
+      if (ItemType === 'group') {
 
       }
 
-      if (ItemType === 'display'){
+      if (ItemType === 'display') {
 
       }
-      if (ItemType === 'attachment'){
+      if (ItemType === 'attachment') {
 
       }
-      if (ItemType === 'reference'){
+      if (ItemType === 'reference') {
 
       }
 
