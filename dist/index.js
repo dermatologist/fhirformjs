@@ -1,37 +1,26 @@
-'use strict';
-
-var fhirformjs = function fhirformjs(fhirjson) {
+const fhirformjs = fhirjson => {
   // Your code goes here
-  var items = fhirjson.item;
-
-  // let FhirContained = null;
+  const items = fhirjson.item; // let FhirContained = null;
   // if (fhirjson.contained !== undefined)
   //   FhirContained = fhirjson.contained;
 
-  var toReturn = {};
-  var buffSchema = {};
-  var buffUi = {};
-  var buffData = {};
-  var buffUiElement = {};
-
+  const toReturn = {};
+  const buffSchema = {};
+  const buffUi = {};
+  const buffData = {};
+  let buffUiElement = {};
   buffSchema.type = 'object';
   buffSchema.properties = {};
-
   buffUi.type = 'VerticalLayout';
   buffUi.elements = [];
-
-  items.forEach(function(item) {
-
-    var ItemType = item.type.toLowerCase();
-    var itemLinkId = item.linkId.replace(/\./g, '___');
-
+  items.forEach(item => {
+    const ItemType = item.type.toLowerCase();
+    const itemLinkId = item.linkId.replace(/\./g, '___');
     buffSchema.properties[itemLinkId] = {};
-
     buffUiElement = {};
     buffUiElement.type = 'Control';
-    buffUiElement.scope = '#/properties/' + itemLinkId;
-
-    if (item.text !== undefined) buffUiElement.label = item.text; else if (item.code.code != undefined) buffUiElement.label = item.code.code;
+    buffUiElement.scope = `#/properties/${itemLinkId}`;
+    if (item.text !== undefined) buffUiElement.label = item.text;else if (item.code.display !== undefined) buffUiElement.label = item.code.display;else if (item.code.code !== undefined) buffUiElement.label = item.code.code;
 
     if (ItemType === 'text') {
       buffSchema.properties[itemLinkId].type = 'string';
@@ -63,12 +52,31 @@ var fhirformjs = function fhirformjs(fhirjson) {
 
     if (ItemType === 'choice') {
       buffSchema.properties[itemLinkId].type = 'string';
-      buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+      const ffEnum = [];
+
+      if (item.option !== undefined) {
+        item.option.forEach(element => {
+          if (element.valueCoding !== undefined && element.valueCoding.code !== undefined) ffEnum.push(element.valueCoding.code);
+        });
+      }
+
+      if (ffEnum === undefined || ffEnum.length === 0) {
+        // array empty or does not exist
+        buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+      } else {
+        buffSchema.properties[itemLinkId].enum = ffEnum;
+      }
     }
 
     if (ItemType === 'open-choice') {
-      buffSchema.properties[itemLinkId].type = 'string';
-      buffSchema.properties[itemLinkId].enum = ['one', 'two'];
+      buffSchema.properties[itemLinkId].type = 'checkboxes';
+      buffSchema.properties[itemLinkId].titleMap = {};
+      buffSchema.properties[itemLinkId].titleMap.one = "one";
+      buffSchema.properties[itemLinkId].titleMap.two = "two";
+      buffSchema.properties[itemLinkId].titleMap.otherField = {};
+      buffSchema.properties[itemLinkId].titleMap.otherField.key = "menu2Other";
+      buffSchema.properties[itemLinkId].titleMap.otherField.title = "Custom other field title";
+      buffSchema.properties[itemLinkId].titleMap.otherField.otherValue = "CUSTOME_OTHER_VALUE";
     }
 
     if (ItemType === 'boolean') {
@@ -100,24 +108,22 @@ var fhirformjs = function fhirformjs(fhirjson) {
       buffSchema.properties[itemLinkId].type = 'string';
     }
 
-    if (ItemType === 'group') {
-    }
+    if (ItemType === 'group') {}
 
-    if (ItemType === 'display') {
-    }
-    if (ItemType === 'attachment') {
-    }
-    if (ItemType === 'reference') {
-    }
+    if (ItemType === 'display') {}
+
+    if (ItemType === 'attachment') {}
+
+    if (ItemType === 'reference') {}
 
     if (ItemType === 'quantity') {
       buffSchema.properties[itemLinkId].type = 'decimal';
       buffSchema.properties[itemLinkId].default = 0;
       buffSchema.properties[itemLinkId].minimum = 0;
       buffSchema.properties[itemLinkId].maximum = 9999;
-    }
+    } // Process data
 
-    // Process data
+
     if (item.answer !== undefined) {
       if (item.answer.valueString !== undefined) buffData[itemLinkId] = item.answer.valueString;
       if (item.answer.valueDate !== undefined) buffData[itemLinkId] = item.answer.valueDate;
@@ -128,21 +134,17 @@ var fhirformjs = function fhirformjs(fhirjson) {
 
     buffUi.elements.push(buffUiElement);
   });
-
   toReturn.schema = buffSchema;
   toReturn.ui = buffUi;
   toReturn.data = buffData;
-
   return toReturn;
 };
 
-var fhirformResp = function fhirformResp(fhirjson, resp) {
-
-  var items = fhirjson.item;
-
-  items.forEach(function(item) {
-    var ItemType = item.type.toLowerCase();
-    var itemLinkId = item.linkId.replace(/\./g, '___');
+const fhirformResp = (fhirjson, resp) => {
+  const items = fhirjson.item;
+  items.forEach(item => {
+    const ItemType = item.type.toLowerCase();
+    const itemLinkId = item.linkId.replace(/\./g, '___');
 
     if (ItemType === 'string') {
       item.answer = {};
@@ -163,18 +165,22 @@ var fhirformResp = function fhirformResp(fhirjson, resp) {
       item.answer = {};
       item.answer.valueDate = resp[itemLinkId];
     }
+
     if (ItemType === 'boolean') {
       item.answer = {};
       item.answer.valueBoolean = resp[itemLinkId];
     }
+
     if (ItemType === 'choice') {
       item.answer = {};
       item.answer.valueChoice = resp[itemLinkId];
     }
   });
-
   fhirjson.item = items;
-
   return fhirjson;
 };
-module.exports = { fhirformjs: fhirformjs, fhirformResp: fhirformResp };
+
+module.exports = {
+  fhirformjs,
+  fhirformResp
+};
