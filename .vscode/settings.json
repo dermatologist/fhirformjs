@@ -1,0 +1,6 @@
+{
+    "npm.executable.path": "/home/bell/.nvm/versions/node/v10.16.3/bin/npm",
+    "debug.node.autoAttach": "on",
+    "npm-intellisense.showBuildInLibs": true
+      
+}
