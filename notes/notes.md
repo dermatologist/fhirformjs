@@ -1,3 +1,9 @@
+# npm package for registry
+
+* use [np](https://github.com/sindresorhus/np)
+
+
+
 http://hapi.fhir.org/baseDstu3/', 'Questionnaire', 'sickKids', '3')
 
 
