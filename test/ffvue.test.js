@@ -4,7 +4,7 @@ const Ffvue = require('../src/ffvue');
 
 describe('ffvue', () => {
   it('should show id', async () => {
-    await fetch('http://hapi.fhir.org/baseDstu3/Questionnaire/417960/_history/1?_pretty=true&_format=json')
+    await fetch('https://www.hl7.org/fhir/questionnaire-example-f201-lifelines.json')
       .then((response) => response.json())
       .then(async (myJson) => {
         const ff = Ffvue.ffvue(myJson);
