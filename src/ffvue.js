@@ -13,16 +13,28 @@ const ffgroup = (gpjson) => {
     return returnJson;
 };
 
+const processPart = (returnJson, item, type) => {
+    returnJson[item.linkId] = {};
+    returnJson[item.linkId].type = type;
+    returnJson[item.linkId].description = item.text;
+    return returnJson;
+}
+
 const processItems = (items) => {
-    const returnJson = {};
+    let returnJson = {};
     items.forEach(item => {
         if(item.type === "group"){
             ffgroup(item);
         }
-        if(item.type === "string"){
-            returnJson[item.linkId] = {};
-            returnJson[item.linkId].type = "string";
-            returnJson[item.linkId].description = item.text;
+        if(item.type === "string" || item.type === "text"){
+            returnJson = processPart(returnJson, item, "string")
+        }
+        if(item.type === "boolean"){
+            returnJson = processPart(returnJson, item, "boolean")
+        }
+        if(item.type === "date"){
+            returnJson = processPart(returnJson, item, "string")
+            returnJson[item.linkId].format = "date";
         }
     });
     console.log(returnJson)
