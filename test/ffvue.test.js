@@ -4,7 +4,7 @@ const Ffvue = require('../src/ffvue');
 
 describe('ffvue', () => {
   it('should show id', async () => {
-    await fetch('http://tomcat.nuchange.ca:6999/fhir/fhir/Questionnaire/1?_format=json')
+    await fetch('http://localhost:8888/fhir/fhir/Questionnaire/1?_format=json')
       .then((response) => response.json())
       .then(async (myJson) => {
         const ff = Ffvue.ffvue(myJson);
