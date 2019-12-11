@@ -16,7 +16,7 @@ const ffgroup = (gpjson) => {
 const processPart = (returnJson, item, type) => {
     returnJson[item.linkId] = {};
     returnJson[item.linkId].type = type;
-    returnJson[item.linkId].description = item.text;
+    returnJson[item.linkId].title = item.text;
     return returnJson;
 }
 
@@ -26,7 +26,7 @@ const processItems = (items) => {
         if(item.type === "group"){
             ffgroup(item);
         }
-        if(item.type === "string" || item.type === "text"){
+        if(item.type === "string" || item.type === "text" || item.type === "uri"){
             returnJson = processPart(returnJson, item, "string")
         }
         if(item.type === "boolean"){
@@ -35,6 +35,9 @@ const processItems = (items) => {
         if(item.type === "date"){
             returnJson = processPart(returnJson, item, "string")
             returnJson[item.linkId].format = "date";
+        }
+        if(item.type === "integer" || item.type === "decimal"){
+            returnJson = processPart(returnJson, item, "number")
         }
     });
     console.log(returnJson)
