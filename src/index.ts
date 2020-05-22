@@ -7,7 +7,6 @@
 
 import { R4 } from '@ahryman40k/ts-fhir-types'
 import VueFormGeneratorSchema from 'schema';
-import VueFormGeneratorModel from 'model';
 import Fform from 'fform';
 
 export const Ffvue = (fhirjson: any) => {
@@ -24,7 +23,7 @@ export const Ffvue = (fhirjson: any) => {
 
   });
 
-  let ffvue_qresp : VueFormGeneratorModel = {model: {resourceType: 'QuestionnaireResponse'}}
+  let ffvue_qresp : R4.IQuestionnaireResponse = { 'resourceType' : "QuestionnaireResponse"}
   
 
   let ffvue_schema : VueFormGeneratorSchema = {}
@@ -34,6 +33,7 @@ export const Ffvue = (fhirjson: any) => {
     schema: ffvue_schema
   }
   
-  
+  console.log(fform)
+
   return fform
 };
