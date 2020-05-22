@@ -1,7 +1,8 @@
-import { sum } from '../src';
+import { Ffvue } from '../src';
+import { Testq1 } from '../src/example/testq1'
 
 describe('blah', () => {
   it('works', () => {
-    expect(sum(1, 1)).toEqual(2);
+    expect(Ffvue(Testq1)).toBeDefined();
   });
 });
