@@ -1,9 +1,9 @@
 export default interface VueFormGeneratorField {
 
-    type: string,
-    inputType: string,
-    label: string,
-    model: string,
+    type?: string,
+    inputType?: string,
+    label?: string,
+    model?: string,
     id?: string,
     values?: Array<string>,
     placeholder?: string,
