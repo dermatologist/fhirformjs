@@ -16,7 +16,12 @@ export const FhirFormVue = (fhirjson: any) => {
   const  schemaValidationResult = R4.RTTI_Questionnaire.decode(fhirjson) // => Right if good, Left if not
   const  fhirq: R4.IQuestionnaire = <R4.IQuestionnaire> schemaValidationResult.value;
 
-  let ffvue_qresp : R4.IQuestionnaireResponse = { 'resourceType' : "QuestionnaireResponse"}
+  let ffvue_qresp : R4.IQuestionnaireResponse = { 
+    resourceType : "QuestionnaireResponse",
+    item: [],
+    status: R4.QuestionnaireResponseStatusKind._inProgress
+  }
+
   let ffvue_schema : VueFormGeneratorSchema = {
     fields: [],
     groups: []
@@ -38,6 +43,7 @@ export const FhirFormVue = (fhirjson: any) => {
         groupitems = item.item
       groupitems.forEach(function(groupitem, _){
         ffvue_group.fields?.push(Fprocess(groupitem))
+        ffvue_qresp.item?.push(Rprocess(groupitem))
       })
 
       ffvue_schema.groups?.push(ffvue_group)
@@ -45,6 +51,7 @@ export const FhirFormVue = (fhirjson: any) => {
     // Just push the fields if not a group
     }else{ 
       ffvue_schema.fields?.push(Fprocess(item))
+      ffvue_qresp.item?.push(Rprocess(item))
     }
   });
 
@@ -67,10 +74,24 @@ export const FhirFormVue = (fhirjson: any) => {
 const Fprocess = (item: R4.IQuestionnaire_Item) => {
   let ffvue_field :VueFormGeneratorField = {
     type: item.type?.toString(),
-    inputType: 'text',
+    inputType: 'text', //@TODO: change type accordingly
     label: item.text?.toString(),
-    id: item.linkId?.toString()
-
+    id: item.linkId?.toString(),
+    model: 'item.answer[0].valueString' //@TODO: change type accordingly
   }
   return ffvue_field
+}
+
+const Rprocess = (item: R4.IQuestionnaire_Item) => {
+  let qresp_item :R4.IQuestionnaireResponse_Item = {
+    linkId: item.linkId,
+    text: item.text,
+    answer: []
+  }
+  //@TODO: check type and change accordingly
+  let ans: R4.IQuestionnaireResponse_Answer = {
+    valueString: ''
+  }
+  qresp_item.answer?.push(ans)
+  return qresp_item
 }
