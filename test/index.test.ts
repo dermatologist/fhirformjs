@@ -1,8 +1,8 @@
-import { Ffvue } from '../src';
+import { FhirFormVue } from '../src/fhirformvue';
 import { Testq1 } from '../src/example/testq1'
 
 describe('blah', () => {
   it('works', () => {
-    expect(Ffvue(Testq1)).toBeDefined();
+    expect(FhirFormVue(Testq1)).toBeDefined();
   });
 });
