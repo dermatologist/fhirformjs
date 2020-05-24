@@ -15,5 +15,6 @@ export default interface VueFormGeneratorField {
     hint?: string,
     validator?: object
     textOn?: string,
-    textOff?: string
+    textOff?: string,
+    dateTimePickerOptions?: any
   } 

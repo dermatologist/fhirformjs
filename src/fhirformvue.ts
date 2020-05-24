@@ -82,6 +82,9 @@ const Fprocess = (item: R4.IQuestionnaire_Item, index: number) => {
     id: item.linkId?.toString(),
     textOn: "on",
     textOff: "off",
+    dateTimePickerOptions: {
+      format: "YYYY-MM-DD HH:mm:ss"
+    },
     model: ReplaceZeroWithIndex(GetValueType(item), index) //@TODO: change type accordingly
   }
   return ffvue_field
