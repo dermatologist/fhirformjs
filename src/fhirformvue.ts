@@ -10,7 +10,7 @@ import VueFormGeneratorField from 'field';
 import Fform from 'fform';
 import VueFormGeneratorGroup from 'group';
 
-export const FhirFormVue = (fhirjson: any) => {
+export const FhirFormVue: any = (fhirjson: any) => {
 
   // validation succeeded
   const  schemaValidationResult = R4.RTTI_Questionnaire.decode(fhirjson) // => Right if good, Left if not
@@ -62,7 +62,7 @@ export const FhirFormVue = (fhirjson: any) => {
   
   console.log(JSON.stringify(fform))
 
-  return fform
+  return JSON.stringify(fform)
 };
 
 /**
@@ -73,11 +73,13 @@ export const FhirFormVue = (fhirjson: any) => {
  */
 const Fprocess = (item: R4.IQuestionnaire_Item) => {
   let ffvue_field :VueFormGeneratorField = {
-    type: item.type?.toString(),
+    type: GetControlType(item),
     inputType: 'text', //@TODO: change type accordingly
     label: item.text?.toString(),
     id: item.linkId?.toString(),
-    model: 'item.answer[0].valueString' //@TODO: change type accordingly
+    textOn: "on",
+    textOff: "off",
+    model: GetValueType(item) //@TODO: change type accordingly
   }
   return ffvue_field
 }
@@ -89,9 +91,59 @@ const Rprocess = (item: R4.IQuestionnaire_Item) => {
     answer: []
   }
   //@TODO: check type and change accordingly
-  let ans: R4.IQuestionnaireResponse_Answer = {
-    valueString: ''
-  }
+  var key = GetOnlyValueType(GetValueType(item))
+  let ans: R4.IQuestionnaireResponse_Answer = {}
+  ans[key] = ""
   qresp_item.answer?.push(ans)
   return qresp_item
+}
+
+const GetControlType = (item: R4.IQuestionnaire_Item) => {
+    if(item.type == R4.Questionnaire_ItemTypeKind._date ||
+      item.type == R4.Questionnaire_ItemTypeKind._dateTime ||
+      item.type == R4.Questionnaire_ItemTypeKind._time
+      ){
+        return "dateTimePicker"
+      }
+    if(item.type == R4.Questionnaire_ItemTypeKind._choice ||
+      item.type == R4.Questionnaire_ItemTypeKind._openChoice 
+      ){
+        return "select"
+      }
+    if(item.type == R4.Questionnaire_ItemTypeKind._boolean){
+        return "switch"
+      }
+    return "input"  
+}
+
+const GetValueType = (item: R4.IQuestionnaire_Item) => {
+  if(item.type == R4.Questionnaire_ItemTypeKind._date){
+    return "item.answer[0].valueDate"
+    }
+  if(item.type == R4.Questionnaire_ItemTypeKind._time){
+    return "item.answer[0].valueTime"
+    }
+  if(item.type == R4.Questionnaire_ItemTypeKind._dateTime){
+    return "item.answer[0].valueDateTime"
+    }
+  if(item.type == R4.Questionnaire_ItemTypeKind._integer){
+    return "item.answer[0].valueInteger"
+    }
+  if(item.type == R4.Questionnaire_ItemTypeKind._decimal){
+    return "item.answer[0].valueDecimal"
+    }
+  if(item.type == R4.Questionnaire_ItemTypeKind._choice){
+    return "item.answer[0].valueBoolean"
+    }
+  return "item.answer[0].valueString"  
+}
+/**
+ * 
+ * @param valueType {string} full model path
+ * 
+ * @returns {sting} just the type
+ */
+const GetOnlyValueType = (valueType: string) => {
+  var pieces = valueType.split(/[\s.]+/) // Split on .
+  return pieces[pieces.length-1]
 }

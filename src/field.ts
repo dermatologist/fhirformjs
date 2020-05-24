@@ -14,5 +14,6 @@ export default interface VueFormGeneratorField {
     default?: boolean,
     hint?: string,
     validator?: object
-  
+    textOn?: string,
+    textOff?: string
   } 
