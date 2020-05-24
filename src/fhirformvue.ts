@@ -27,6 +27,7 @@ export const FhirFormVue: any = (fhirjson: any) => {
     groups: []
   }
 
+  let index = 0;
   fhirq.item?.forEach(function(item, _){ // _ is the ignored index
 
     // If the item is a group
@@ -42,7 +43,8 @@ export const FhirFormVue: any = (fhirjson: any) => {
       if(item.item)
         groupitems = item.item
       groupitems.forEach(function(groupitem, _){
-        ffvue_group.fields?.push(Fprocess(groupitem))
+        ffvue_group.fields?.push(Fprocess(groupitem, index))
+        index++
         ffvue_qresp.item?.push(Rprocess(groupitem))
       })
 
@@ -50,7 +52,8 @@ export const FhirFormVue: any = (fhirjson: any) => {
 
     // Just push the fields if not a group
     }else{ 
-      ffvue_schema.fields?.push(Fprocess(item))
+      ffvue_schema.fields?.push(Fprocess(item, index))
+      index++
       ffvue_qresp.item?.push(Rprocess(item))
     }
   });
@@ -71,7 +74,7 @@ export const FhirFormVue: any = (fhirjson: any) => {
  * 
  * @returns {VueFormGeneratorField} 
  */
-const Fprocess = (item: R4.IQuestionnaire_Item) => {
+const Fprocess = (item: R4.IQuestionnaire_Item, index: number) => {
   let ffvue_field :VueFormGeneratorField = {
     type: GetControlType(item),
     inputType: 'text', //@TODO: change type accordingly
@@ -79,7 +82,7 @@ const Fprocess = (item: R4.IQuestionnaire_Item) => {
     id: item.linkId?.toString(),
     textOn: "on",
     textOff: "off",
-    model: GetValueType(item) //@TODO: change type accordingly
+    model: ReplaceZeroWithIndex(GetValueType(item), index) //@TODO: change type accordingly
   }
   return ffvue_field
 }
@@ -132,7 +135,7 @@ const GetValueType = (item: R4.IQuestionnaire_Item) => {
   if(item.type == R4.Questionnaire_ItemTypeKind._decimal){
     return "item.answer[0].valueDecimal"
     }
-  if(item.type == R4.Questionnaire_ItemTypeKind._choice){
+  if(item.type == R4.Questionnaire_ItemTypeKind._boolean){
     return "item.answer[0].valueBoolean"
     }
   return "item.answer[0].valueString"  
@@ -146,4 +149,8 @@ const GetValueType = (item: R4.IQuestionnaire_Item) => {
 const GetOnlyValueType = (valueType: string) => {
   var pieces = valueType.split(/[\s.]+/) // Split on .
   return pieces[pieces.length-1]
+}
+
+const ReplaceZeroWithIndex = (fullString: string, index: number) => {
+  return fullString.replace("item.answer[0]", "item["+index.toString()+"].answer[0]")
 }
