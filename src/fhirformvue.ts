@@ -77,7 +77,7 @@ export const FhirFormVue: any = (fhirjson: any) => {
 const Fprocess = (item: R4.IQuestionnaire_Item, index: number) => {
   let ffvue_field :VueFormGeneratorField = {
     type: GetControlType(item),
-    inputType: 'text', //@TODO: change type accordingly
+    inputType: 'text', 
     label: item.text?.toString(),
     id: item.linkId?.toString(),
     textOn: "on",
@@ -85,7 +85,7 @@ const Fprocess = (item: R4.IQuestionnaire_Item, index: number) => {
     dateTimePickerOptions: {
       format: "YYYY-MM-DD HH:mm:ss"
     },
-    model: ReplaceZeroWithIndex(GetValueType(item), index) //@TODO: change type accordingly
+    model: AddIndexToItems(GetValueType(item), index) 
   }
   return ffvue_field
 }
@@ -96,7 +96,7 @@ const Rprocess = (item: R4.IQuestionnaire_Item) => {
     text: item.text,
     answer: []
   }
-  //@TODO: check type and change accordingly
+
   var key = GetOnlyValueType(GetValueType(item))
   let ans: R4.IQuestionnaireResponse_Answer = {}
   ans[key] = ""
@@ -154,6 +154,6 @@ const GetOnlyValueType = (valueType: string) => {
   return pieces[pieces.length-1]
 }
 
-const ReplaceZeroWithIndex = (fullString: string, index: number) => {
+const AddIndexToItems = (fullString: string, index: number) => {
   return fullString.replace("item.answer[0]", "item["+index.toString()+"].answer[0]")
 }
