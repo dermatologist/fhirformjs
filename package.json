@@ -1,8 +1,21 @@
 {
-  "version": "0.1.0",
+  "name": "fhirformjs",
+  "description": "FHIR Questionnaire To Json Schema Converter",
+  "version": "0.5.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "author": {
+    "name": "Bell Eapen",
+    "email": "gravatar@gulfdoctor.net",
+    "url": "https://nuchange.ca"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dermatologist/fhirformjs.git"
+  },
+  "homepage": "https://github.com/dermatologist/fhirformjs",
+  "keywords": ["fhir", "json-schema", "questionnaire", "forms", "ehealth"],
   "files": [
     "dist",
     "src"
@@ -14,8 +27,10 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "lint": "tsdx lint --fix",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
   },
   "peerDependencies": {},
   "husky": {
@@ -29,16 +44,27 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "fhirformjs",
-  "author": "Bell Eapen",
   "module": "dist/fhirformjs.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/fhirformjs.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/fhirformjs.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "devDependencies": {
-    "husky": "^4.2.5",
-    "tsdx": "^0.13.2",
-    "tslib": "^2.0.0",
-    "typescript": "^3.9.3"
+    "@size-limit/preset-small-lib": "^4.6.0",
+    "husky": "^4.3.0",
+    "size-limit": "^4.6.0",
+    "tsdx": "^0.14.0",
+    "tslib": "^2.0.1",
+    "typescript": "^4.0.3"
   },
   "dependencies": {
-    "@ahryman40k/ts-fhir-types": "^4.0.25"
+    "@ahryman40k/ts-fhir-types": "^4.0.32",
+    "uuidv4": "^6.2.3"
   }
 }
