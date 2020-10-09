@@ -1,9 +1,8 @@
-import { R4 } from '@ahryman40k/ts-fhir-types'
-import VueFormGeneratorSchema from 'schema';
+import { R4 } from '@ahryman40k/ts-fhir-types';
+import FhirJsonSchema from './schema';
 
 export default interface Fform {
-
-    model: R4.IQuestionnaireResponse,
-    schema: VueFormGeneratorSchema
-
+    model: R4.IQuestionnaireResponse;
+    schema: FhirJsonSchema;
+    uischema: any;
 }

@@ -1,9 +1,5 @@
-import VueFormGeneratorField from "field";
-import VueFormGeneratorGroup from 'group';
-
-export default interface VueFormGeneratorSchema {
-
-    fields?: Array<VueFormGeneratorField>
-    groups?: Array<VueFormGeneratorGroup>
-  }
-  
+export default interface FhirJsonSchema {
+  type?: string;
+  title?: string;
+  properties?: any;
+}

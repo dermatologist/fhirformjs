@@ -1,20 +1,9 @@
-export default interface VueFormGeneratorField {
-
-    type?: string,
-    inputType?: string,
-    label?: string,
-    model?: string,
-    id?: string,
-    values?: Array<string>,
-    placeholder?: string,
-    readonly?: boolean,
-    disabled?: boolean,
-    featured?: boolean,
-    required?: boolean,
-    default?: boolean,
-    hint?: string,
-    validator?: object
-    textOn?: string,
-    textOff?: string,
-    dateTimePickerOptions?: any
-  } 
+export default interface FhirJsonField {
+  type?: string;
+  title?: string;
+  default?: string;
+  description?: string;
+  minimum?: number;
+  maximum?: number;
+  minLength?: number;
+}
