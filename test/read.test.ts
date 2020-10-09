@@ -1,4 +1,4 @@
-import { Testq1 } from './example/testq1';
+import { Testq1 } from '../examples/testq1';
 
 describe('read', () => {
   it('works', () => {

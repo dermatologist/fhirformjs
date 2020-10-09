@@ -1,5 +1,5 @@
 import { FhirJsonForm } from '../src/ques-mapper';
-import { Testq1 } from './example/testq1';
+import { Testq1 } from '../examples/testq1';
 
 describe('map', () => {
   it('maps fhir schema to json schema', () => {
