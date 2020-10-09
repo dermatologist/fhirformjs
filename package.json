@@ -41,7 +41,7 @@
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "//": "Removing pre-commit: tsdx lint. Add this later. Besides this how to comment in package.json :)"
     }
   },
   "prettier": {
