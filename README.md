@@ -1,27 +1,42 @@
-# TSDX Bootstrap
+# fhirformjs
+## About
+Creating, maintaining and using forms for health data capture is vital, and [FHIRForm](https://github.com/E-Health/fhirform) is a framework for that. FHIRFormJS is one of its components (an npm module) that helps create input forms corresponding to a [FHIR questionnaire](https://www.hl7.org/fhir/questionnaire.html). FHIRFormJS does not render forms but converts FHIR questionnaire into a schema and lets other libraries (such as [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form) ) do the heavy lifting. An output mapper that maps the output from a react-jsonschema-form to a [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html) is also available. See this example React app to see how it is used. This is a modern alternative to [LHC-Forms](https://lhncbc.github.io/lforms/) 
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+FHIRFormJS is WIP (not production ready). Pull requests are welcome (See CONTRIBUTING.md) and add issues and feature requests by clicking on the 'issues' tab.
 
-## Local Development
+## Installation
+```
+npm i --save fhirformjs
+```
 
-Below is a list of commands you will probably find useful.
+## Usage example (In a React component)
+* FHIRFormJS is framework independent and can be used with other frameworks such as Vue / Angular.
+* *Testq1 is a FHIR Questionnaire object*
+```
+import { FhirJsonForm, FhirJsonResp } from 'fhirformjs'
+import Form from "@rjsf/core"
+  const resp = JSON.parse(FhirJsonForm(Testq1))
+  let formData = {}
+  let respData = {}
+  function handleSubmit(data){
+    respData = FhirJsonResp(resp.model, data)
+    console.log(respData)
+  }
+  return (
+    <div className="App">
+      <header className="App-header">
+        <Form schema={resp.schema} 
+        uiSchema={resp.uischema}
+        formData={formData}
+        onSubmit={e => handleSubmit(e.formData)}
+        />
+      </header>
+    </div>
+  );
+```
+[See an example](https://github.com/dermatologist/fhirform-react)
 
-### `npm start` or `yarn start`
+## Author
 
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
+* [Bell Eapen](http://nuchange.ca/) 
 
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
-
-Your library will be rebuilt if you make edits.
-
-### `npm run build` or `yarn build`
-
-Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
-
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
-
-### `npm test` or `yarn test`
-
-Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
