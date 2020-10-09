@@ -15,7 +15,13 @@
     "url": "https://github.com/dermatologist/fhirformjs.git"
   },
   "homepage": "https://github.com/dermatologist/fhirformjs",
-  "keywords": ["fhir", "json-schema", "questionnaire", "forms", "ehealth"],
+  "keywords": [
+    "fhir",
+    "json-schema",
+    "questionnaire",
+    "forms",
+    "ehealth"
+  ],
   "files": [
     "dist",
     "src"
