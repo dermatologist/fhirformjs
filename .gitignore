@@ -1,7 +1,6 @@
+*.log
+.DS_Store
 node_modules
-coverage
-
+dist
 .idea
-.nyc_output
-.vs
 

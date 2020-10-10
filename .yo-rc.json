@@ -1,9 +1,0 @@
-{
-  "generator-npm-module": {
-    "promptValues": {
-      "authorName": "dermatologist",
-      "fullName": "Bell Eapen",
-      "emailAddress": "github_public@gulfdoctor.net"
-    }
-  }
-}
