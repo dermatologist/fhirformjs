@@ -1,0 +1,13 @@
+{
+    "licenser.license": "MIT",
+    "licenser.author": "Bell Eapen",
+    "licenser.projectName": "FHIRFormJS",
+    "debug.node.autoAttach": "on",
+    "npm-intellisense.showBuildInLibs": true,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true
+    }
+      
+}

@@ -1,8 +1,0 @@
-{
-  "extends": ["airbnb-base", "prettier"],
-  "rules": {
-    "no-empty": "off",
-    "no-param-reassign": "off",
-    "no-console": "off"
-  }
-}
