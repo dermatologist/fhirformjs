@@ -10,8 +10,9 @@ import FhirJsonSchema from './schema';
 import Fform from './fform';
 export const FhirJsonForm: any = (fhirjson: any) => {
   // validation succeeded
-  const schemaValidationResult = R4.RTTI_Questionnaire.decode(fhirjson); // => Right if good, Left if not
-  const fhirq: R4.IQuestionnaire = schemaValidationResult.value as R4.IQuestionnaire;
+  // const schemaValidationResult = R4.RTTI_Questionnaire.decode(fhirjson); // => Right if good, Left if not
+  // const fhirq: R4.IQuestionnaire = schemaValidationResult.value as R4.IQuestionnaire;
+  const fhirq: R4.IQuestionnaire = fhirjson as R4.IQuestionnaire;
 
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
