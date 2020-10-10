@@ -1,7 +1,7 @@
 {
   "name": "fhirformjs",
-  "description": "FHIR Questionnaire To Json Schema Converter",
-  "version": "0.5.0",
+  "description": "FHIR Questionnaire To Form Converter for rendering",
+  "version": "0.5.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -41,7 +41,7 @@
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "//": "Removing pre-commit: tsdx lint. Add this later. Besides this how to comment in package.json :)"
+      "pre-commit": "tsdx lint"
     }
   },
   "prettier": {
