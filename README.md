@@ -2,7 +2,7 @@
 ## About
 Creating, maintaining and using forms for health data capture is vital, and [FHIRForm](https://github.com/E-Health/fhirform) is a framework for that. FHIRFormJS is one of its components (an npm module) that helps create input forms corresponding to a [FHIR questionnaire](https://www.hl7.org/fhir/questionnaire.html). FHIRFormJS does not render forms but converts FHIR questionnaire into a schema and lets other libraries (such as [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form) ) do the heavy lifting. An output mapper that maps the output from a react-jsonschema-form to a [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html) is also available. See this example React app to see how it is used. This is a modern alternative to [LHC-Forms](https://lhncbc.github.io/lforms/) 
 
-FHIRFormJS is WIP (not production ready). Pull requests are welcome (See CONTRIBUTING.md) and add issues and feature requests by clicking on the 'issues' tab.
+FHIRFormJS is WIP (not production ready). Pull requests are welcome (See CONTRIBUTING.md) and add issues and feature requests by clicking on the 'issues' tab. :point_up:
 
 ## Installation
 ```
