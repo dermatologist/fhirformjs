@@ -8,7 +8,7 @@ import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
 import Fform from './fform';
-export const FhirJsonForm: any = (fhirq: R4.IQuestionnaire) => {
+export const FhirJsonForm = (fhirq: R4.IQuestionnaire): Fform => {
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
 
@@ -83,7 +83,7 @@ export const FhirJsonForm: any = (fhirq: R4.IQuestionnaire) => {
     schema: fform_schema,
     uischema: UISchema,
   };
-  return JSON.stringify(fform);
+  return fform;
 };
 
 /**
