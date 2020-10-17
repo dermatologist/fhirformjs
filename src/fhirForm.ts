@@ -4,5 +4,5 @@ import FhirJsonSchema from './schema';
 export default interface Fform {
   model: R4.IQuestionnaireResponse;
   schema: FhirJsonSchema;
-  uischema: any;
+  uiSchema: any;
 }

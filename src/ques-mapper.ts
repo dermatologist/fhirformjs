@@ -7,23 +7,18 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
 import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
-import Fform from './fform';
-export const FhirJsonForm: any = (fhirjson: any) => {
-  // validation succeeded
-  // const schemaValidationResult = R4.RTTI_Questionnaire.decode(fhirjson); // => Right if good, Left if not
-  // const fhirq: R4.IQuestionnaire = schemaValidationResult.value as R4.IQuestionnaire;
-  const fhirq: R4.IQuestionnaire = fhirjson as R4.IQuestionnaire;
-
+import FhirForm from './fhirForm';
+export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => {
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
 
-  let ffvue_qresp: R4.IQuestionnaireResponse = {
+  let fhirQuestionnaireResponse: R4.IQuestionnaireResponse = {
     resourceType: 'QuestionnaireResponse',
     item: [],
     status: R4.QuestionnaireResponseStatusKind._inProgress,
   };
 
-  fhirq.item?.forEach(function(item, _) {
+  fhirQuestionnaire.item?.forEach(function(item, _) {
     // _ is the ignored index
 
     // If the item is a group
@@ -39,34 +34,34 @@ export const FhirJsonForm: any = (fhirjson: any) => {
       ALL_PROPERTIES[groupProperty]['title'] = groupTitle;
       ALL_PROPERTIES[groupProperty]['properties'] = {};
       // Get group items from outer item
-      let groupitems: Array<R4.IQuestionnaire_Item> = [];
-      if (item.item) groupitems = item.item;
-      groupitems.forEach(function(groupitem, _) {
+      let groupItems: Array<R4.IQuestionnaire_Item> = [];
+      if (item.item) groupItems = item.item;
+      groupItems.forEach(function(groupItem, _) {
         let myProperty =
-          typeof groupitem.linkId === 'undefined'
+          typeof groupItem.linkId === 'undefined'
             ? uuid()
-            : groupitem.linkId.toString();
-        ALL_PROPERTIES[groupProperty]['properties'][myProperty] = Fprocess(
-          groupitem
+            : groupItem.linkId.toString();
+        ALL_PROPERTIES[groupProperty]['properties'][myProperty] = ProcessQuestionnaireItem(
+          groupItem
         );
-        if (GetOptions(groupitem) !== '') {
+        if (GetOptions(groupItem) !== '') {
           ALL_PROPERTIES[groupProperty]['properties'][myProperty][
             'enum'
-          ] = GetOptions(groupitem);
+          ] = GetOptions(groupItem);
         }
-        if (GetWidget(groupitem) !== '') {
+        if (GetWidget(groupItem) !== '') {
           UISchema[groupProperty][myProperty] = {};
           UISchema[groupProperty][myProperty]['ui:widget'] = GetWidget(
-            groupitem
+            groupItem
           );
         }
-        ffvue_qresp.item?.push(Rprocess(groupitem));
+        fhirQuestionnaireResponse.item?.push(CreateResponseItem(groupItem));
       });
       // Just push the fields if not a group
     } else {
       let myProperty =
         typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
-      ALL_PROPERTIES[myProperty] = Fprocess(item);
+      ALL_PROPERTIES[myProperty] = ProcessQuestionnaireItem(item);
       if (GetOptions(item) !== '') {
         ALL_PROPERTIES[myProperty]['enum'] = GetOptions(item);
       }
@@ -74,21 +69,21 @@ export const FhirJsonForm: any = (fhirjson: any) => {
         UISchema[myProperty] = {};
         UISchema[myProperty]['ui:widget'] = GetWidget(item);
       }
-      ffvue_qresp.item?.push(Rprocess(item));
+      fhirQuestionnaireResponse.item?.push(CreateResponseItem(item));
     }
   });
 
-  let fform_schema: FhirJsonSchema = {
+  let fhirJsonSchema: FhirJsonSchema = {
     type: 'object',
-    title: fhirq.id?.toString(),
+    title: fhirQuestionnaire.id?.toString(),
     properties: ALL_PROPERTIES,
   };
-  let fform: Fform = {
-    model: ffvue_qresp,
-    schema: fform_schema,
-    uischema: UISchema,
+  let fhirForm: FhirForm = {
+    model: fhirQuestionnaireResponse,
+    schema: fhirJsonSchema,
+    uiSchema: UISchema,
   };
-  return JSON.stringify(fform);
+  return fhirForm;
 };
 
 /**
@@ -97,7 +92,7 @@ export const FhirJsonForm: any = (fhirjson: any) => {
  *
  * @returns {VueFormGeneratorField}
  */
-const Fprocess = (item: R4.IQuestionnaire_Item) => {
+const ProcessQuestionnaireItem = (item: R4.IQuestionnaire_Item) => {
   let ff_field: FhirJsonField = {
     type: GetControlType(item),
     title: item.text?.toString(),
@@ -191,8 +186,8 @@ const GetValueType = (item: R4.IQuestionnaire_Item) => {
   return 'item.answer[0].valueString';
 };
 
-const Rprocess = (item: R4.IQuestionnaire_Item) => {
-  let qresp_item: R4.IQuestionnaireResponse_Item = {
+const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
+  let responseItem: R4.IQuestionnaireResponse_Item = {
     linkId: item.linkId,
     text: item.text,
     answer: [],
@@ -201,8 +196,8 @@ const Rprocess = (item: R4.IQuestionnaire_Item) => {
   var key = GetOnlyValueType(GetValueType(item));
   let ans: R4.IQuestionnaireResponse_Answer = {};
   ans[key] = '';
-  qresp_item.answer?.push(ans);
-  return qresp_item;
+  responseItem.answer?.push(ans);
+  return responseItem;
 };
 
 /**
