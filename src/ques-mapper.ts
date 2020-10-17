@@ -73,14 +73,14 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
     }
   });
 
-  let fform_schema: FhirJsonSchema = {
+  let fhirJsonSchema: FhirJsonSchema = {
     type: 'object',
     title: fhirQuestionnaire.id?.toString(),
     properties: ALL_PROPERTIES,
   };
   let fhirForm: FhirForm = {
     model: fhirQuestionnaireResponse,
-    schema: fform_schema,
+    schema: fhirJsonSchema,
     uischema: UISchema,
   };
   return fhirForm;
