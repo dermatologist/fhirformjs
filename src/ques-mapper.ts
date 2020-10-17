@@ -8,7 +8,7 @@ import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
 import FhirForm from './fhirForm';
-export const FhirJsonForm = (fhirq: R4.IQuestionnaire): FhirForm => {
+export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => {
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
 
@@ -18,7 +18,7 @@ export const FhirJsonForm = (fhirq: R4.IQuestionnaire): FhirForm => {
     status: R4.QuestionnaireResponseStatusKind._inProgress,
   };
 
-  fhirq.item?.forEach(function(item, _) {
+  fhirQuestionnaire.item?.forEach(function(item, _) {
     // _ is the ignored index
 
     // If the item is a group
@@ -75,7 +75,7 @@ export const FhirJsonForm = (fhirq: R4.IQuestionnaire): FhirForm => {
 
   let fform_schema: FhirJsonSchema = {
     type: 'object',
-    title: fhirq.id?.toString(),
+    title: fhirQuestionnaire.id?.toString(),
     properties: ALL_PROPERTIES,
   };
   let fhirForm: FhirForm = {
