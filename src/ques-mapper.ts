@@ -55,7 +55,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
             groupItem
           );
         }
-        fhirQuestionnaireResponse.item?.push(Rprocess(groupItem));
+        fhirQuestionnaireResponse.item?.push(CreateResponseItem(groupItem));
       });
       // Just push the fields if not a group
     } else {
@@ -69,7 +69,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
         UISchema[myProperty] = {};
         UISchema[myProperty]['ui:widget'] = GetWidget(item);
       }
-      fhirQuestionnaireResponse.item?.push(Rprocess(item));
+      fhirQuestionnaireResponse.item?.push(CreateResponseItem(item));
     }
   });
 
@@ -186,7 +186,7 @@ const GetValueType = (item: R4.IQuestionnaire_Item) => {
   return 'item.answer[0].valueString';
 };
 
-const Rprocess = (item: R4.IQuestionnaire_Item) => {
+const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
   let qresp_item: R4.IQuestionnaireResponse_Item = {
     linkId: item.linkId,
     text: item.text,
