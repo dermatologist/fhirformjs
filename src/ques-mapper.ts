@@ -41,7 +41,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
           typeof groupItem.linkId === 'undefined'
             ? uuid()
             : groupItem.linkId.toString();
-        ALL_PROPERTIES[groupProperty]['properties'][myProperty] = Fprocess(
+        ALL_PROPERTIES[groupProperty]['properties'][myProperty] = ProcessQuestionnaireItem(
           groupItem
         );
         if (GetOptions(groupItem) !== '') {
@@ -61,7 +61,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
     } else {
       let myProperty =
         typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
-      ALL_PROPERTIES[myProperty] = Fprocess(item);
+      ALL_PROPERTIES[myProperty] = ProcessQuestionnaireItem(item);
       if (GetOptions(item) !== '') {
         ALL_PROPERTIES[myProperty]['enum'] = GetOptions(item);
       }
@@ -92,7 +92,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
  *
  * @returns {VueFormGeneratorField}
  */
-const Fprocess = (item: R4.IQuestionnaire_Item) => {
+const ProcessQuestionnaireItem = (item: R4.IQuestionnaire_Item) => {
   let ff_field: FhirJsonField = {
     type: GetControlType(item),
     title: item.text?.toString(),
