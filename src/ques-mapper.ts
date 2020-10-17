@@ -7,7 +7,7 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
 import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
-import Fform from './fform';
+import Fform from './fhirForm';
 export const FhirJsonForm = (fhirq: R4.IQuestionnaire): Fform => {
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};

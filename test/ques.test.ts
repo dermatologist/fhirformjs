@@ -1,6 +1,6 @@
 import { FhirJsonForm } from '../src/ques-mapper';
 import { Testq1 } from '../examples/testq1';
-import Fform from '../src/fform';
+import Fform from '../src/fhirForm';
 
 describe('map', () => {
   it('maps fhir schema to json schema', () => {
@@ -13,7 +13,6 @@ describe('map', () => {
   });
   it('maps fhir to ui', () => {
     const ff: Fform = FhirJsonForm(Testq1);
-    expect(ff.uischema).toEqual({ "2": { "2.2": { "ui:widget": "datetime" } }, "3": {} })
-    console.log(ff.uischema);
+    expect(ff.uischema).toEqual({ "2": { "2.2": { "ui:widget": "datetime" } }, "3": {} });
   });
 });
