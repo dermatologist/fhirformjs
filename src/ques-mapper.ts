@@ -187,7 +187,7 @@ const GetValueType = (item: R4.IQuestionnaire_Item) => {
 };
 
 const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
-  let qresp_item: R4.IQuestionnaireResponse_Item = {
+  let responseItem: R4.IQuestionnaireResponse_Item = {
     linkId: item.linkId,
     text: item.text,
     answer: [],
@@ -196,8 +196,8 @@ const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
   var key = GetOnlyValueType(GetValueType(item));
   let ans: R4.IQuestionnaireResponse_Answer = {};
   ans[key] = '';
-  qresp_item.answer?.push(ans);
-  return qresp_item;
+  responseItem.answer?.push(ans);
+  return responseItem;
 };
 
 /**
