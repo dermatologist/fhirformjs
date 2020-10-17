@@ -8,7 +8,9 @@ import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
 import FhirForm from './fhirForm';
-export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => {
+export const FhirJsonForm = (
+  fhirQuestionnaire: R4.IQuestionnaire
+): FhirForm => {
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
 
@@ -41,9 +43,9 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
           typeof groupItem.linkId === 'undefined'
             ? uuid()
             : groupItem.linkId.toString();
-        ALL_PROPERTIES[groupProperty]['properties'][myProperty] = ProcessQuestionnaireItem(
-          groupItem
-        );
+        ALL_PROPERTIES[groupProperty]['properties'][
+          myProperty
+        ] = ProcessQuestionnaireItem(groupItem);
         if (GetOptions(groupItem) !== '') {
           ALL_PROPERTIES[groupProperty]['properties'][myProperty][
             'enum'

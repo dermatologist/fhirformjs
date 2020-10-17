@@ -1,7 +1,10 @@
 import { R4 } from '@ahryman40k/ts-fhir-types';
 import { uuid } from 'uuidv4';
 
-export const FhirJsonResp = (fhirResponse: R4.IQuestionnaireResponse, formData: any): R4.IQuestionnaireResponse => {
+export const FhirJsonResp = (
+  fhirResponse: R4.IQuestionnaireResponse,
+  formData: any
+): R4.IQuestionnaireResponse => {
   fhirResponse.item?.forEach(function(item, _) {
     let myProperty =
       typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
