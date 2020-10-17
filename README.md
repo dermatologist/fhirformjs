@@ -2,7 +2,7 @@
 ## About
 Creating, maintaining and using forms for health data capture is vital, and [FHIRForm](https://github.com/E-Health/fhirform) is a framework for that. FHIRFormJS is one of its components (an npm module) that helps create input forms corresponding to a [FHIR questionnaire](https://www.hl7.org/fhir/questionnaire.html). FHIRFormJS does not render forms but converts FHIR questionnaire into a schema and lets other libraries (such as [react-jsonschema-form](https://github.com/rjsf-team/react-jsonschema-form) ) do the heavy lifting. An output mapper that maps the output from a react-jsonschema-form to a [QuestionnaireResponse](https://www.hl7.org/fhir/questionnaireresponse.html) is also available. See this example React app to see how it is used. This is a modern alternative to [LHC-Forms](https://lhncbc.github.io/lforms/) 
 
-FHIRFormJS is WIP (not production ready). Pull requests are welcome (See CONTRIBUTING.md) and add issues and feature requests by clicking on the 'issues' tab.
+FHIRFormJS is WIP (not production ready). Pull requests are welcome (See CONTRIBUTING.md) and add issues and feature requests by clicking on the 'issues' tab. :point_up:
 
 ## Installation
 ```
@@ -15,18 +15,18 @@ npm i --save fhirformjs
 ```
 import { FhirJsonForm, FhirJsonResp } from 'fhirformjs'
 import Form from "@rjsf/core"
-  const resp = JSON.parse(FhirJsonForm(Testq1))
+  const resp = FhirJsonForm(Testq1)
   let formData = {}
   let respData = {}
   function handleSubmit(data){
     respData = FhirJsonResp(resp.model, data)
-    console.log(respData)
+    console.log(JSON.stringify(respData))
   }
   return (
     <div className="App">
       <header className="App-header">
         <Form schema={resp.schema} 
-        uiSchema={resp.uischema}
+        uiSchema={resp.uiSchema}
         formData={formData}
         onSubmit={e => handleSubmit(e.formData)}
         />
@@ -34,7 +34,7 @@ import Form from "@rjsf/core"
     </div>
   );
 ```
-[See an example](https://github.com/dermatologist/fhirform-react)
+### [See an example](https://github.com/dermatologist/fhir-questionnaire-render-react) :point_left:
 
 ## Author
 

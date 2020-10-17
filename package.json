@@ -1,7 +1,7 @@
 {
   "name": "fhirformjs",
   "description": "FHIR Questionnaire To Form Converter for rendering",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -23,8 +23,7 @@
     "ehealth"
   ],
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
@@ -41,7 +40,7 @@
   "peerDependencies": {},
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "//": "pre-commit tsdx lint"
     }
   },
   "prettier": {
