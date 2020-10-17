@@ -2,8 +2,8 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
 import { uuid } from 'uuidv4';
 
 export const FhirJsonResp: any = (respjson: any, formData: any) => {
-  const fhirr: R4.IQuestionnaireResponse = respjson;
-  fhirr.item?.forEach(function(item, _) {
+  const fhirResponse: R4.IQuestionnaireResponse = respjson;
+  fhirResponse.item?.forEach(function(item, _) {
     let myProperty =
       typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
 
@@ -21,7 +21,7 @@ export const FhirJsonResp: any = (respjson: any, formData: any) => {
       item.answer?.push({ valueInteger: myValue });
   });
 
-  return JSON.stringify(fhirr);
+  return JSON.stringify(fhirResponse);
 };
 
 // https://stackoverflow.com/questions/15523514/find-by-key-deep-in-a-nested-array
