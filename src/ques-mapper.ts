@@ -34,28 +34,28 @@ export const FhirJsonForm = (fhirq: R4.IQuestionnaire): FhirForm => {
       ALL_PROPERTIES[groupProperty]['title'] = groupTitle;
       ALL_PROPERTIES[groupProperty]['properties'] = {};
       // Get group items from outer item
-      let groupitems: Array<R4.IQuestionnaire_Item> = [];
-      if (item.item) groupitems = item.item;
-      groupitems.forEach(function(groupitem, _) {
+      let groupItems: Array<R4.IQuestionnaire_Item> = [];
+      if (item.item) groupItems = item.item;
+      groupItems.forEach(function(groupItem, _) {
         let myProperty =
-          typeof groupitem.linkId === 'undefined'
+          typeof groupItem.linkId === 'undefined'
             ? uuid()
-            : groupitem.linkId.toString();
+            : groupItem.linkId.toString();
         ALL_PROPERTIES[groupProperty]['properties'][myProperty] = Fprocess(
-          groupitem
+          groupItem
         );
-        if (GetOptions(groupitem) !== '') {
+        if (GetOptions(groupItem) !== '') {
           ALL_PROPERTIES[groupProperty]['properties'][myProperty][
             'enum'
-          ] = GetOptions(groupitem);
+          ] = GetOptions(groupItem);
         }
-        if (GetWidget(groupitem) !== '') {
+        if (GetWidget(groupItem) !== '') {
           UISchema[groupProperty][myProperty] = {};
           UISchema[groupProperty][myProperty]['ui:widget'] = GetWidget(
-            groupitem
+            groupItem
           );
         }
-        ffvue_qresp.item?.push(Rprocess(groupitem));
+        ffvue_qresp.item?.push(Rprocess(groupItem));
       });
       // Just push the fields if not a group
     } else {
