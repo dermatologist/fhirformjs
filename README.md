@@ -15,7 +15,7 @@ npm i --save fhirformjs
 ```
 import { FhirJsonForm, FhirJsonResp } from 'fhirformjs'
 import Form from "@rjsf/core"
-  const resp = JFhirJsonForm(Testq1)
+  const resp = FhirJsonForm(Testq1)
   let formData = {}
   let respData = {}
   function handleSubmit(data){
