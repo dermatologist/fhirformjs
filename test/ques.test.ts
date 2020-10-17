@@ -13,6 +13,6 @@ describe('map', () => {
   });
   it('maps fhir to ui', () => {
     const ff: Fform = FhirJsonForm(Testq1);
-    expect(ff.uischema).toEqual({ "2": { "2.2": { "ui:widget": "datetime" } }, "3": {} });
+    expect(ff.uiSchema).toEqual({ "2": { "2.2": { "ui:widget": "datetime" } }, "3": {} });
   });
 });
