@@ -12,7 +12,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
 
-  let ffvue_qresp: R4.IQuestionnaireResponse = {
+  let fhirQuestionnaireResponse: R4.IQuestionnaireResponse = {
     resourceType: 'QuestionnaireResponse',
     item: [],
     status: R4.QuestionnaireResponseStatusKind._inProgress,
@@ -55,7 +55,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
             groupItem
           );
         }
-        ffvue_qresp.item?.push(Rprocess(groupItem));
+        fhirQuestionnaireResponse.item?.push(Rprocess(groupItem));
       });
       // Just push the fields if not a group
     } else {
@@ -69,7 +69,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
         UISchema[myProperty] = {};
         UISchema[myProperty]['ui:widget'] = GetWidget(item);
       }
-      ffvue_qresp.item?.push(Rprocess(item));
+      fhirQuestionnaireResponse.item?.push(Rprocess(item));
     }
   });
 
@@ -79,7 +79,7 @@ export const FhirJsonForm = (fhirQuestionnaire: R4.IQuestionnaire): FhirForm => 
     properties: ALL_PROPERTIES,
   };
   let fhirForm: FhirForm = {
-    model: ffvue_qresp,
+    model: fhirQuestionnaireResponse,
     schema: fform_schema,
     uischema: UISchema,
   };
