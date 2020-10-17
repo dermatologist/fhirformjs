@@ -15,7 +15,7 @@ npm i --save fhirformjs
 ```
 import { FhirJsonForm, FhirJsonResp } from 'fhirformjs'
 import Form from "@rjsf/core"
-  const resp = JSON.parse(FhirJsonForm(Testq1))
+  const resp = JFhirJsonForm(Testq1)
   let formData = {}
   let respData = {}
   function handleSubmit(data){
@@ -26,7 +26,7 @@ import Form from "@rjsf/core"
     <div className="App">
       <header className="App-header">
         <Form schema={resp.schema} 
-        uiSchema={resp.uischema}
+        uiSchema={resp.uiSchema}
         formData={formData}
         onSubmit={e => handleSubmit(e.formData)}
         />
