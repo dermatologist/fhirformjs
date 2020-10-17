@@ -78,12 +78,12 @@ export const FhirJsonForm = (fhirq: R4.IQuestionnaire): FhirForm => {
     title: fhirq.id?.toString(),
     properties: ALL_PROPERTIES,
   };
-  let fform: FhirForm = {
+  let fhirForm: FhirForm = {
     model: ffvue_qresp,
     schema: fform_schema,
     uischema: UISchema,
   };
-  return fform;
+  return fhirForm;
 };
 
 /**
