@@ -7,8 +7,8 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
 import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
-import Fform from './fhirForm';
-export const FhirJsonForm = (fhirq: R4.IQuestionnaire): Fform => {
+import FhirForm from './fhirForm';
+export const FhirJsonForm = (fhirq: R4.IQuestionnaire): FhirForm => {
   let ALL_PROPERTIES: any = {};
   let UISchema: any = {};
 
@@ -78,7 +78,7 @@ export const FhirJsonForm = (fhirq: R4.IQuestionnaire): Fform => {
     title: fhirq.id?.toString(),
     properties: ALL_PROPERTIES,
   };
-  let fform: Fform = {
+  let fform: FhirForm = {
     model: ffvue_qresp,
     schema: fform_schema,
     uischema: UISchema,
