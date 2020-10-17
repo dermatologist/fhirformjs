@@ -20,7 +20,7 @@ import Form from "@rjsf/core"
   let respData = {}
   function handleSubmit(data){
     respData = FhirJsonResp(resp.model, data)
-    console.log(respData)
+    console.log(JSON.stringify(respData))
   }
   return (
     <div className="App">
