@@ -51,7 +51,7 @@ export const FhirJsonForm = (
 
         ALL_PROPERTIES[groupProperty]['properties'][
           myProperty
-        ] = GetItemProperties(item);
+        ] = GetItemProperties(groupItem);
         
         if (GetWidget(groupItem) !== '') {
           UISchema[groupProperty][myProperty] = {
@@ -212,6 +212,7 @@ const GetValueType = (item: R4.IQuestionnaire_Item) => {
     case R4.Questionnaire_ItemTypeKind._boolean:
       return 'item.answer[0].valueBoolean'
     case R4.Questionnaire_ItemTypeKind._choice:
+    case R4.Questionnaire_ItemTypeKind._openChoice:
       return 'item.answer[0].valueCoding'
 
     default:
@@ -231,6 +232,7 @@ const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
 
   switch (item.type) {
     case R4.Questionnaire_ItemTypeKind._choice:
+    case R4.Questionnaire_ItemTypeKind._openChoice:
       const option = (item.answerOption || [])[0]
       ans[key] = Object
         .keys(option.valueCoding || {})
