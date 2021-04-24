@@ -8,8 +8,8 @@ export const supportedValueTypes = [
   'valueDate',
   'valueInteger',
   'valueDecimal',
-  'valueCoding'
-]
+  'valueCoding',
+];
 
 export const FhirJsonResp = (
   fhirResponse: R4.IQuestionnaireResponse,
@@ -25,7 +25,9 @@ export const FhirJsonResp = (
     let myElement = item.answer?.pop();
 
     if (myElement && item.answer) {
-      item.answer = item.answer.concat(formValueToFhirAnswer(myValue, myElement, schema, myProperty))
+      item.answer = item.answer.concat(
+        formValueToFhirAnswer(myValue, myElement, schema, myProperty)
+      );
     }
   });
 
@@ -33,7 +35,7 @@ export const FhirJsonResp = (
 };
 
 // https://stackoverflow.com/questions/15523514/find-by-key-deep-in-a-nested-array
-const getObject = function(theObject: Object|Object[], theProperty: string) {
+const getObject = function(theObject: Object | Object[], theProperty: string) {
   var result = null;
   if (theObject instanceof Array) {
     for (var i = 0; i < theObject.length; i++) {
@@ -71,20 +73,27 @@ const formValueToFhirAnswer = (
   jsonSchema: FhirForm['schema'],
   linkId: string
 ) =>
-  supportedValueTypes.reduce((answer: Array<{ [x: string]: any }>, propertyName) => {
-    if (fhirElement && fhirElement.hasOwnProperty(propertyName)) {
-      const enumNames = jsonSchema.properties[linkId]?.enumNames
-      if (enumNames) {
-        const valueIndex = jsonSchema.properties[linkId].enum.indexOf(formDataValue)
-        answer.push({
-          [propertyName]: {code: formDataValue, display: enumNames[valueIndex]}
-        })
+  supportedValueTypes.reduce(
+    (answer: Array<{ [x: string]: any }>, propertyName) => {
+      if (fhirElement && fhirElement.hasOwnProperty(propertyName)) {
+        const enumNames = jsonSchema.properties[linkId]?.enumNames;
+        if (enumNames) {
+          const valueIndex = jsonSchema.properties[linkId].enum.indexOf(
+            formDataValue
+          );
+          answer.push({
+            [propertyName]: {
+              code: formDataValue,
+              display: enumNames[valueIndex],
+            },
+          });
+        } else {
+          answer.push({
+            [propertyName]: formDataValue,
+          });
+        }
       }
-      else {
-        answer.push({
-          [propertyName]: formDataValue
-        })
-      }
-    }
-    return answer
-  }, [])
+      return answer;
+    },
+    []
+  );
