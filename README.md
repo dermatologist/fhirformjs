@@ -24,7 +24,7 @@ import Form from "@rjsf/core"
   let formData = {}
   let respData = {}
   function handleSubmit(data){
-    respData = FhirJsonResp(resp.model, data)
+    respData = FhirJsonResp(resp.model, data, resp.schema)
     console.log(JSON.stringify(respData))
   }
   return (
@@ -43,5 +43,7 @@ import Form from "@rjsf/core"
 
 ## Author
 
-* [Bell Eapen](http://nuchange.ca/)
+* [Bell Eapen](https://nuchange.ca) [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
 
+## Contributor(s)
+* [Marco Ferreira](https://rco.cc) [![Twitter Follow](https://img.shields.io/twitter/follow/marfife?style=social)](https://twitter.com/marfife)
