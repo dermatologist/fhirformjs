@@ -8,6 +8,7 @@ import { uuid } from 'uuidv4';
 import FhirJsonField from './field';
 import FhirJsonSchema from './schema';
 import FhirForm from './fhirForm';
+
 export const FhirJsonForm = (
   fhirQuestionnaire: R4.IQuestionnaire
 ): FhirForm => {
@@ -30,47 +31,49 @@ export const FhirJsonForm = (
         typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
       let groupTitle =
         typeof item.text === 'undefined' ? uuid() : item.text.toString();
-      ALL_PROPERTIES[groupProperty] = {};
+
       UISchema[groupProperty] = {};
+      ALL_PROPERTIES[groupProperty] = {};
       ALL_PROPERTIES[groupProperty]['type'] = 'object';
       ALL_PROPERTIES[groupProperty]['title'] = groupTitle;
       ALL_PROPERTIES[groupProperty]['properties'] = {};
+
       // Get group items from outer item
       let groupItems: Array<R4.IQuestionnaire_Item> = [];
+
       if (item.item) groupItems = item.item;
+
       groupItems.forEach(function(groupItem, _) {
         let myProperty =
           typeof groupItem.linkId === 'undefined'
             ? uuid()
             : groupItem.linkId.toString();
+
         ALL_PROPERTIES[groupProperty]['properties'][
           myProperty
-        ] = ProcessQuestionnaireItem(groupItem);
-        if (GetOptions(groupItem) !== '') {
-          ALL_PROPERTIES[groupProperty]['properties'][myProperty][
-            'enum'
-          ] = GetOptions(groupItem);
-        }
+        ] = GetItemProperties(item);
+
         if (GetWidget(groupItem) !== '') {
-          UISchema[groupProperty][myProperty] = {};
-          UISchema[groupProperty][myProperty]['ui:widget'] = GetWidget(
-            groupItem
-          );
+          UISchema[groupProperty][myProperty] = {
+            'ui:widget': GetWidget(groupItem),
+          };
         }
         fhirQuestionnaireResponse.item?.push(CreateResponseItem(groupItem));
       });
+
       // Just push the fields if not a group
     } else {
       let myProperty =
         typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
-      ALL_PROPERTIES[myProperty] = ProcessQuestionnaireItem(item);
-      if (GetOptions(item) !== '') {
-        ALL_PROPERTIES[myProperty]['enum'] = GetOptions(item);
-      }
+
+      ALL_PROPERTIES[myProperty] = GetItemProperties(item);
+
       if (GetWidget(item) !== '') {
-        UISchema[myProperty] = {};
-        UISchema[myProperty]['ui:widget'] = GetWidget(item);
+        UISchema[myProperty] = {
+          'ui:widget': GetWidget(item),
+        };
       }
+
       fhirQuestionnaireResponse.item?.push(CreateResponseItem(item));
     }
   });
@@ -89,6 +92,23 @@ export const FhirJsonForm = (
 };
 
 /**
+ * Takes a R4.IQuestionnaire_Item and returns an extended FhirJsonField
+ * @param {R4.IQuestionnaire_Item} item
+ *
+ * @returns {FhirJsonField} properties
+ */
+const GetItemProperties = (item: R4.IQuestionnaire_Item) => {
+  const properties = ProcessQuestionnaireItem(item);
+  const itemOptions = GetOptions(item);
+
+  if (itemOptions !== '') {
+    return { ...properties, ...itemOptions };
+  }
+
+  return properties;
+};
+
+/**
  * Takes a R4.IQuestionnaire_Item and returns the VueFormGeneratorField
  * @param {R4.IQuestionnaire_Item} item
  *
@@ -103,16 +123,27 @@ const ProcessQuestionnaireItem = (item: R4.IQuestionnaire_Item) => {
 };
 
 const GetOptions = (item: R4.IQuestionnaire_Item) => {
-  let choiceOptions: string[] = [];
+  let enumOptions: string[] = [];
+  let enumNames: string[] = [];
+
   if (typeof item.answerOption !== 'undefined') {
     item.answerOption?.forEach(function(choice, _) {
-      let myCode =
+      let code =
         typeof choice.valueCoding === 'undefined'
           ? ''
           : choice.valueCoding.code?.toString();
-      choiceOptions.push(typeof myCode === 'undefined' ? '' : myCode);
+
+      enumOptions.push(typeof code === 'undefined' ? '' : code);
+
+      let display = choice.valueCoding?.display?.toString();
+      if (display !== undefined) {
+        enumNames.push(display);
+      }
     });
-    return choiceOptions;
+    return {
+      enum: enumOptions,
+      enumNames,
+    };
   }
   // if (
   //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
@@ -167,25 +198,25 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
 };
 
 const GetValueType = (item: R4.IQuestionnaire_Item) => {
-  if (item.type === R4.Questionnaire_ItemTypeKind._date) {
-    return 'item.answer[0].valueDate';
+  switch (item.type) {
+    case R4.Questionnaire_ItemTypeKind._date:
+      return 'item.answer[0].valueDate';
+    case R4.Questionnaire_ItemTypeKind._time:
+      return 'item.answer[0].valueTime';
+    case R4.Questionnaire_ItemTypeKind._dateTime:
+      return 'item.answer[0].valueDateTime';
+    case R4.Questionnaire_ItemTypeKind._integer:
+      return 'item.answer[0].valueInteger';
+    case R4.Questionnaire_ItemTypeKind._decimal:
+      return 'item.answer[0].valueDecimal';
+    case R4.Questionnaire_ItemTypeKind._boolean:
+      return 'item.answer[0].valueBoolean';
+    case R4.Questionnaire_ItemTypeKind._choice:
+      return 'item.answer[0].valueCoding';
+
+    default:
+      return 'item.answer[0].valueString';
   }
-  if (item.type === R4.Questionnaire_ItemTypeKind._time) {
-    return 'item.answer[0].valueTime';
-  }
-  if (item.type === R4.Questionnaire_ItemTypeKind._dateTime) {
-    return 'item.answer[0].valueDateTime';
-  }
-  if (item.type === R4.Questionnaire_ItemTypeKind._integer) {
-    return 'item.answer[0].valueInteger';
-  }
-  if (item.type === R4.Questionnaire_ItemTypeKind._decimal) {
-    return 'item.answer[0].valueDecimal';
-  }
-  if (item.type === R4.Questionnaire_ItemTypeKind._boolean) {
-    return 'item.answer[0].valueBoolean';
-  }
-  return 'item.answer[0].valueString';
 };
 
 const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
@@ -197,7 +228,21 @@ const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
 
   var key = GetOnlyValueType(GetValueType(item));
   let ans: R4.IQuestionnaireResponse_Answer = {};
-  ans[key] = '';
+
+  switch (item.type) {
+    case R4.Questionnaire_ItemTypeKind._choice:
+      const option = (item.answerOption || [])[0];
+      ans[key] = Object.keys(option.valueCoding || {}).reduce(
+        (acc, prop) => ({ ...acc, [prop]: '' }),
+        {}
+      );
+      break;
+
+    default:
+      ans[key] = '';
+      break;
+  }
+
   responseItem.answer?.push(ans);
   return responseItem;
 };
