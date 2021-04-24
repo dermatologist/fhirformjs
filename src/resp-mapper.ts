@@ -66,19 +66,19 @@ const getObject = function(theObject: Object|Object[], theProperty: string) {
 };
 
 const formValueToFhirAnswer = (
-  formDataValue: String | Object, 
+  formDataValue: String | Object,
   fhirElement: R4.IQuestionnaireResponse_Answer,
   jsonSchema: FhirForm['schema'],
   linkId: string
-) => 
+) =>
   supportedValueTypes.reduce((answer: Array<{ [x: string]: any }>, propertyName) => {
     if (fhirElement && fhirElement.hasOwnProperty(propertyName)) {
-      const enumNames = jsonSchema.properties[linkId].enumNames
+      const enumNames = jsonSchema.properties[linkId]?.enumNames
       if (enumNames) {
         const valueIndex = jsonSchema.properties[linkId].enum.indexOf(formDataValue)
         answer.push({
           [propertyName]: {code: formDataValue, display: enumNames[valueIndex]}
-        })  
+        })
       }
       else {
         answer.push({
