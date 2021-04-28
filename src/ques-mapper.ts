@@ -140,10 +140,26 @@ const GetOptions = (item: R4.IQuestionnaire_Item) => {
         enumNames.push(display);
       }
     });
-    return {
+
+    const options = {
       enum: enumOptions,
       enumNames,
-    };
+    }
+
+    const ext: R4.IExtension = (item.extension || [])[0]
+    const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
+
+    if (coding?.code === EXTENSION_CHECKBOX) {
+      return {
+        uniqueItems: true,
+        items: {
+          type: "string",
+          ...options
+        }
+      }
+    }
+
+    return options;
   }
   // if (
   //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
@@ -165,12 +181,17 @@ const GetWidget = (item: R4.IQuestionnaire_Item) => {
   ) {
     return 'datetime';
   }
-  // if (
-  //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
-  //   item.type == R4.Questionnaire_ItemTypeKind._openChoice
-  // ) {
-  //   return 'select';
-  // }
+  if (
+    item.type == R4.Questionnaire_ItemTypeKind._choice ||
+    item.type == R4.Questionnaire_ItemTypeKind._openChoice
+  ) {
+    const ext: R4.IExtension = (item.extension || [])[0]
+    const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
+
+    if (coding?.code && extensionToWidget[coding?.code]) {
+      return extensionToWidget[coding?.code]
+    }
+  }
   // if (item.type === R4.Questionnaire_ItemTypeKind._boolean) {
   //   return 'boolean';
   // }
@@ -185,12 +206,17 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
   // ) {
   //   return 'dateTimePicker';
   // }
-  // if (
-  //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
-  //   item.type == R4.Questionnaire_ItemTypeKind._openChoice
-  // ) {
-  //   return 'select';
-  // }
+  if (
+    item.type == R4.Questionnaire_ItemTypeKind._choice ||
+    item.type == R4.Questionnaire_ItemTypeKind._openChoice
+  ) {
+    const ext: R4.IExtension = (item.extension || [])[0]
+    const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
+
+    if (coding?.code === EXTENSION_CHECKBOX) {
+      return 'array'
+    }
+  }
   if (item.type === R4.Questionnaire_ItemTypeKind._boolean) {
     return 'boolean';
   }
@@ -258,3 +284,13 @@ const GetOnlyValueType = (valueType: string) => {
   var pieces = valueType.split(/[\s.]+/); // Split on .
   return pieces[pieces.length - 1];
 };
+
+
+const EXTENSION_DROPDOWN = 'drop-down'
+const EXTENSION_RADIOBUTTON = 'radio-button'
+const EXTENSION_CHECKBOX = 'check-box'
+const extensionToWidget = {
+  [EXTENSION_DROPDOWN]: 'select',
+  [EXTENSION_RADIOBUTTON]: 'radio',
+  [EXTENSION_CHECKBOX]: 'checkboxes'
+}
