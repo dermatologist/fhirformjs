@@ -58,6 +58,13 @@ export const FhirJsonForm = (
             'ui:widget': GetWidget(groupItem),
           };
         }
+        
+        if (GetUIOptions(groupItem) !== '') {
+          UISchema[groupProperty][myProperty] = {
+            'ui:options': GetUIOptions(groupItem),
+          };
+        }
+
         fhirQuestionnaireResponse.item?.push(CreateResponseItem(groupItem));
       });
 
@@ -71,6 +78,12 @@ export const FhirJsonForm = (
       if (GetWidget(item) !== '') {
         UISchema[myProperty] = {
           'ui:widget': GetWidget(item),
+        };
+      }
+
+      if (GetUIOptions(item) !== '') {
+        UISchema[myProperty] = {
+          'ui:options': GetUIOptions(item),
         };
       }
 
@@ -160,7 +173,7 @@ const GetOptions = (item: R4.IQuestionnaire_Item) => {
     }
 
     return options;
-  }
+  } 
   // if (
   //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
   //   item.type == R4.Questionnaire_ItemTypeKind._openChoice
@@ -197,6 +210,20 @@ const GetWidget = (item: R4.IQuestionnaire_Item) => {
   // }
   return '';
 };
+
+const GetUIOptions = (item: R4.IQuestionnaire_Item) => {
+  const ext: R4.IExtension = (item.extension || [])[0]
+  const splitUrl = ext?.url?.split('/')
+  const extensionName = splitUrl && splitUrl[splitUrl.length-1]
+
+  if (ext?.valueCoding?.display && extensionName === 'questionnaire-unit') {
+    return {
+      unit: ext.valueCoding.display
+    }
+  }
+
+  return '';
+}
 
 const GetControlType = (item: R4.IQuestionnaire_Item) => {
   // if (
