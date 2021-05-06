@@ -19,14 +19,17 @@ describe('Testing Fhir Backend', () => {
     });
 
     it('gets table of contents', async () => {
-
         const toc: unknown = backend.getTableOfContents()
         expect(toc).toBeTruthy()
     });
 
     it('gets single questionnaire', async () => {
-        const questionnaire: R4.IBundle_Entry = backend.getQuestionnaire('2050148')
-        expect(questionnaire.id).toBe('2050148')
-        console.log(questionnaire)
+        if (backend.getQuestionnaire('2050148') != undefined) {
+            const questionnaire: R4.IBundle_Entry = backend.getQuestionnaire('2050148')!
+            expect(questionnaire.id).toBe('2050148')
+            console.log(questionnaire)
+        } else {
+            throw new Error("Bundle not found");
+        }
     });
 });
