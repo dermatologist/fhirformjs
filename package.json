@@ -32,6 +32,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
+    "test-watch": "tsdx test --watch",
     "lint": "tsdx lint --fix",
     "prepare": "tsdx build",
     "docs": "typedoc --out docs src",
