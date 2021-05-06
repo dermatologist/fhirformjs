@@ -25,9 +25,8 @@ describe('Testing Fhir Backend', () => {
     });
 
     it('gets single questionnaire', async () => {
-        
-        console.log(backend.getQuestionnaire('2050148'))
-        const questionnaire: R4.IQuestionnaire = {...backend.getQuestionnaire('2050138'), resourceType: 'Questionnaire'}
+        const questionnaire: R4.IBundle_Entry = backend.getQuestionnaire('2050148')
+        expect(questionnaire.id).toBe('2050148')
         console.log(questionnaire)
     });
 });
