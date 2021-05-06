@@ -38,7 +38,6 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "//": "pre-commit tsdx lint"
@@ -72,6 +71,7 @@
   },
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.32",
+    "axios": "^0.21.1",
     "uuidv4": "^6.2.3"
   }
 }
