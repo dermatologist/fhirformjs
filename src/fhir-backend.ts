@@ -32,7 +32,7 @@ export class FhirBackend {
         getQuestionnaire(id: string){
             return  this.questionnaireBundle?.entry?.find(entry => {
                 return entry.resource?.id  === id
-            })
+            })?.resource
         }
 }
 
