@@ -58,6 +58,13 @@ export const FhirJsonForm = (
             'ui:widget': GetWidget(groupItem),
           };
         }
+        
+        if (GetUIOptions(groupItem) !== '') {
+          UISchema[groupProperty][myProperty] = {
+            'ui:options': GetUIOptions(groupItem),
+          };
+        }
+
         fhirQuestionnaireResponse.item?.push(CreateResponseItem(groupItem));
       });
 
@@ -71,6 +78,12 @@ export const FhirJsonForm = (
       if (GetWidget(item) !== '') {
         UISchema[myProperty] = {
           'ui:widget': GetWidget(item),
+        };
+      }
+
+      if (GetUIOptions(item) !== '') {
+        UISchema[myProperty] = {
+          'ui:options': GetUIOptions(item),
         };
       }
 
@@ -140,11 +153,27 @@ const GetOptions = (item: R4.IQuestionnaire_Item) => {
         enumNames.push(display);
       }
     });
-    return {
+
+    const options = {
       enum: enumOptions,
       enumNames,
-    };
-  }
+    }
+
+    const ext: R4.IExtension = (item.extension || [])[0]
+    const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
+
+    if (coding?.code === EXTENSION_CHECKBOX) {
+      return {
+        uniqueItems: true,
+        items: {
+          type: "string",
+          ...options
+        }
+      }
+    }
+
+    return options;
+  } 
   // if (
   //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
   //   item.type == R4.Questionnaire_ItemTypeKind._openChoice
@@ -165,17 +194,36 @@ const GetWidget = (item: R4.IQuestionnaire_Item) => {
   ) {
     return 'datetime';
   }
-  // if (
-  //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
-  //   item.type == R4.Questionnaire_ItemTypeKind._openChoice
-  // ) {
-  //   return 'select';
-  // }
+  if (
+    item.type == R4.Questionnaire_ItemTypeKind._choice ||
+    item.type == R4.Questionnaire_ItemTypeKind._openChoice
+  ) {
+    const ext: R4.IExtension = (item.extension || [])[0]
+    const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
+
+    if (coding?.code && extensionToWidget[coding?.code]) {
+      return extensionToWidget[coding?.code]
+    }
+  }
   // if (item.type === R4.Questionnaire_ItemTypeKind._boolean) {
   //   return 'boolean';
   // }
   return '';
 };
+
+const GetUIOptions = (item: R4.IQuestionnaire_Item) => {
+  const ext: R4.IExtension = (item.extension || [])[0]
+  const splitUrl = ext?.url?.split('/')
+  const extensionName = splitUrl && splitUrl[splitUrl.length-1]
+
+  if (ext?.valueCoding?.display && extensionName === 'questionnaire-unit') {
+    return {
+      unit: ext.valueCoding.display
+    }
+  }
+
+  return '';
+}
 
 const GetControlType = (item: R4.IQuestionnaire_Item) => {
   // if (
@@ -185,12 +233,17 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
   // ) {
   //   return 'dateTimePicker';
   // }
-  // if (
-  //   item.type == R4.Questionnaire_ItemTypeKind._choice ||
-  //   item.type == R4.Questionnaire_ItemTypeKind._openChoice
-  // ) {
-  //   return 'select';
-  // }
+  if (
+    item.type == R4.Questionnaire_ItemTypeKind._choice ||
+    item.type == R4.Questionnaire_ItemTypeKind._openChoice
+  ) {
+    const ext: R4.IExtension = (item.extension || [])[0]
+    const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
+
+    if (coding?.code === EXTENSION_CHECKBOX) {
+      return 'array'
+    }
+  }
   if (item.type === R4.Questionnaire_ItemTypeKind._boolean) {
     return 'boolean';
   }
@@ -258,3 +311,13 @@ const GetOnlyValueType = (valueType: string) => {
   var pieces = valueType.split(/[\s.]+/); // Split on .
   return pieces[pieces.length - 1];
 };
+
+
+const EXTENSION_DROPDOWN = 'drop-down'
+const EXTENSION_RADIOBUTTON = 'radio-button'
+const EXTENSION_CHECKBOX = 'check-box'
+const extensionToWidget = {
+  [EXTENSION_DROPDOWN]: 'select',
+  [EXTENSION_RADIOBUTTON]: 'radio',
+  [EXTENSION_CHECKBOX]: 'checkboxes'
+}

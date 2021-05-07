@@ -39,6 +39,14 @@ import Form from "@rjsf/core"
     </div>
   );
 ```
+### Update
+**since v0.8.0: Backend API**
+```
+import { FhirBackend } from 'fhirformjs'
+const backend = new FhirBackend('http://hapi.fhir.org/baseR4');
+console.log(backend.getTableOfContents())
+console.log(backend.getQuestionnaire('2050148'))
+```
 ### [See an example](https://github.com/dermatologist/fhir-questionnaire-render-react) :point_left:
 
 ## Author
