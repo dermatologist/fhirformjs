@@ -6,7 +6,7 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
  */
 export class FhirBackend {
 
-        baseUrl: string = "http://hapi.fhir.org/baseR4"
+        baseUrl: string = ''
         questionnaireBundle: R4.IBundle = {
             resourceType: "Bundle"
         }

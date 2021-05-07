@@ -3,7 +3,7 @@ import { R4 } from '@ahryman40k/ts-fhir-types';
 
 describe('Testing Fhir Backend', () => {
 
-    const backend = new FhirBackend('');
+    const backend = new FhirBackend('http://hapi.fhir.org/baseR4');
     beforeAll( async () => {
         await backend.initialize()
     });
