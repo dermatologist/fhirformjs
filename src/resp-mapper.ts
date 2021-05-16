@@ -87,7 +87,7 @@ const formValueToFhirAnswer = (
           answer.push({
             [propertyName]: {
               code: formDataValue,
-              display: enumNames[valueIndex],
+              display: enumNames[valueIndex] || null,
             },
           });
         } else {
