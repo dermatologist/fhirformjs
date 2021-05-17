@@ -35,35 +35,37 @@ export const FhirJsonResp = (
 };
 
 // https://stackoverflow.com/questions/15523514/find-by-key-deep-in-a-nested-array
-const getObject = function(theObject: Object | Object[], theProperty: string) {
+const getObject = function(theObject: Object | Object[], theProperty: string, returnObjects?: boolean) {
   var result = null;
   if (theObject instanceof Array) {
     for (var i = 0; i < theObject.length; i++) {
-      result = getObject(theObject[i], theProperty);
+      // end of the road of value is a string
+      if (typeof theObject[i] === "string") {
+        break;
+      }
+
+      result = getObject(theObject[i], theProperty, returnObjects);
       if (result) {
         break;
       }
     }
   } else {
     for (var prop in theObject) {
-      //console.log(prop + ': ' + theObject[prop]);
-      if (prop === theProperty) {
-        if (theObject[prop] instanceof Object) {
-        } else {
-          return theObject[prop];
-        }
+      if (prop === theProperty && (!(theObject[prop] instanceof Object) || returnObjects) ) {
+        return theObject[prop];
       }
       if (
         theObject[prop] instanceof Object ||
         theObject[prop] instanceof Array
       ) {
-        result = getObject(theObject[prop], theProperty);
+        result = getObject(theObject[prop], theProperty, returnObjects);
         if (result) {
           break;
         }
       }
     }
   }
+
   return result;
 };
 
@@ -72,19 +74,20 @@ const formValueToFhirAnswer = (
   fhirElement: R4.IQuestionnaireResponse_Answer,
   jsonSchema: FhirForm['schema'],
   linkId: string
-) =>
+) => 
   supportedValueTypes.reduce(
     (answer: Array<{ [x: string]: any }>, propertyName) => {
       if (fhirElement && fhirElement.hasOwnProperty(propertyName)) {
-        const enumNames = jsonSchema.properties[linkId]?.enumNames;
+        const linkProperties = getObject(jsonSchema.properties, linkId, true)      
+        const enumNames = linkProperties?.enumNames;
         if (enumNames) {
-          const valueIndex = jsonSchema.properties[linkId].enum.indexOf(
+          const valueIndex = linkProperties.enum.indexOf(
             formDataValue
           );
           answer.push({
             [propertyName]: {
               code: formDataValue,
-              display: enumNames[valueIndex],
+              display: enumNames[valueIndex] || null,
             },
           });
         } else {
@@ -94,6 +97,6 @@ const formValueToFhirAnswer = (
         }
       }
       return answer;
-    },
+    }, 
     []
-  );
+);
