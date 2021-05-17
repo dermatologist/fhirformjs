@@ -13,6 +13,7 @@ export const FhirJsonForm = (
   fhirQuestionnaire: R4.IQuestionnaire
 ): FhirForm => {
   let ALL_PROPERTIES: any = {};
+  let requiredProperties: string[] = [];
   let UISchema: any = {};
 
   let fhirQuestionnaireResponse: R4.IQuestionnaireResponse = {
@@ -53,20 +54,34 @@ export const FhirJsonForm = (
           myProperty
         ] = GetItemProperties(groupItem);
 
+        if (groupItem.required) {
+          if (ALL_PROPERTIES[groupProperty]['required'] === undefined) {
+            ALL_PROPERTIES[groupProperty]['required'] = []
+          }
+          ALL_PROPERTIES[groupProperty]['required'].push(myProperty)
+        }
+
         if (GetWidget(groupItem) !== '') {
           UISchema[groupProperty][myProperty] = {
             'ui:widget': GetWidget(groupItem),
           };
         }
         
-        if (GetUIOptions(groupItem) !== '') {
+        const uiOptions = GetUIOptions(groupItem)
+        if (uiOptions !== '') {
           UISchema[groupProperty][myProperty] = {
-            'ui:options': GetUIOptions(groupItem),
+            'ui:options': uiOptions,
           };
+
+          if (uiOptions.unit) {
+            UISchema[groupProperty][myProperty]['ui:placeholder'] = uiOptions.unit
+          }
         }
 
         fhirQuestionnaireResponse.item?.push(CreateResponseItem(groupItem));
       });
+
+      item.required && requiredProperties.push(groupProperty)
 
       // Just push the fields if not a group
     } else {
@@ -88,6 +103,8 @@ export const FhirJsonForm = (
       }
 
       fhirQuestionnaireResponse.item?.push(CreateResponseItem(item));
+
+      item.required && requiredProperties.push(myProperty)
     }
   });
 
@@ -95,6 +112,7 @@ export const FhirJsonForm = (
     type: 'object',
     title: fhirQuestionnaire.id?.toString(),
     properties: ALL_PROPERTIES,
+    required: requiredProperties,
   };
   let fhirForm: FhirForm = {
     model: fhirQuestionnaireResponse,
@@ -244,9 +262,19 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
       return 'array'
     }
   }
+
   if (item.type === R4.Questionnaire_ItemTypeKind._boolean) {
     return 'boolean';
   }
+
+  if (item.type == R4.Questionnaire_ItemTypeKind._decimal) {
+    return 'number';
+  }
+
+  if (item.type == R4.Questionnaire_ItemTypeKind._integer) {
+    return 'integer';
+  }
+
   return 'string';
 };
 
@@ -288,7 +316,7 @@ const CreateResponseItem = (item: R4.IQuestionnaire_Item) => {
     case R4.Questionnaire_ItemTypeKind._openChoice:
       const option = (item.answerOption || [])[0]
       ans[key] = Object
-        .keys(option.valueCoding || {})
+        .keys(option?.valueCoding || {})
         .reduce((acc, prop) => ({...acc, [prop]: ''}), {})
       break;
 
