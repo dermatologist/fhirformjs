@@ -11,7 +11,7 @@ const formData =
   '{"1": true,"2": {"2.1": "Male", "2.2": "12/12/2020", "2.3": "Canada", "2.4": "Married"},"3": {"3.1": true,"3.2": true}}';
 
 const parsedResponse: R4.IQuestionnaireResponse = JSON.parse(
-  '      {"resourceType":"QuestionnaireResponse","item":[{"linkId":"1","text":"Do you have allergies?","answer":[{"valueBoolean":true}]},{"linkId":"sex","text":"Sex","answer":[{"valueCoding":null}]},{"linkId":"2.2","text":"What is your date of birth?","answer":[{"valueDate":"12/12/2020"}]},{"linkId":"2.3","text":"What is your country of birth?","answer":[{"valueString":"Canada"}]},{"linkId":"2.4","text":"What is your marital status?","answer":[{"valueString":"Married"}]},{"linkId":"3.1","text":"Do you smoke?","answer":[{"valueBoolean":true}]},{"linkId":"3.2","text":"Do you drink alchohol?","answer":[{"valueBoolean":true}]}],"status":"in-progress"}'
+  '      {"resourceType":"QuestionnaireResponse","item":[{"linkId":"1","text":"Do you have allergies?","answer":[{"valueBoolean":true}]},{"linkId":"sex","text":"Sex","answer":[{"valueCoding":{"code":null,"display":null}}]},{"linkId":"2.2","text":"What is your date of birth?","answer":[{"valueDate":"12/12/2020"}]},{"linkId":"2.3","text":"What is your country of birth?","answer":[{"valueString":"Canada"}]},{"linkId":"2.4","text":"What is your marital status?","answer":[{"valueString":"Married"}]},{"linkId":"3.1","text":"Do you smoke?","answer":[{"valueBoolean":true}]},{"linkId":"3.2","text":"Do you drink alchohol?","answer":[{"valueBoolean":true}]}],"status":"in-progress"}'
 );
 
 describe('map', () => {
