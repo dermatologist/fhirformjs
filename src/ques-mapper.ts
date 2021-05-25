@@ -251,6 +251,7 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
   // ) {
   //   return 'dateTimePicker';
   // }
+
   if (
     item.type == R4.Questionnaire_ItemTypeKind._choice ||
     item.type == R4.Questionnaire_ItemTypeKind._openChoice
@@ -260,6 +261,10 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
 
     if (coding?.code === EXTENSION_CHECKBOX) {
       return 'array'
+    }
+
+    if (coding?.code === EXTENSION_SLIDER) {
+      return 'number'
     }
   }
 
@@ -344,8 +349,10 @@ const GetOnlyValueType = (valueType: string) => {
 const EXTENSION_DROPDOWN = 'drop-down'
 const EXTENSION_RADIOBUTTON = 'radio-button'
 const EXTENSION_CHECKBOX = 'check-box'
+const EXTENSION_SLIDER = 'slider'
 const extensionToWidget = {
   [EXTENSION_DROPDOWN]: 'select',
   [EXTENSION_RADIOBUTTON]: 'radio',
-  [EXTENSION_CHECKBOX]: 'checkboxes'
+  [EXTENSION_CHECKBOX]: 'checkboxes',
+  [EXTENSION_SLIDER]: 'range'
 }
