@@ -86,7 +86,7 @@ const formValueToFhirAnswer = (
           );
           answer.push({
             [propertyName]: {
-              code: `${formDataValue}`,
+              code: formDataValue !== null && formDataValue !== void 0 ? `${formDataValue}` : formDataValue,
               display: enumNames[valueIndex] || null,
             },
           });
