@@ -154,7 +154,7 @@ const ProcessQuestionnaireItem = (item: R4.IQuestionnaire_Item) => {
 };
 
 const GetOptions = (item: R4.IQuestionnaire_Item) => {
-  let enumOptions: string[] = [];
+  let enumOptions: (string|number)[] = [];
   let enumNames: string[] = [];
 
   if (typeof item.answerOption !== 'undefined') {
@@ -162,7 +162,9 @@ const GetOptions = (item: R4.IQuestionnaire_Item) => {
       let code =
         typeof choice.valueCoding === 'undefined'
           ? ''
-          : choice.valueCoding.code?.toString();
+          : GetControlType(item) === 'integer' 
+            ? choice.valueCoding.code && parseInt(choice.valueCoding.code)
+            : choice.valueCoding.code?.toString();
 
       enumOptions.push(typeof code === 'undefined' ? '' : code);
 
@@ -264,7 +266,7 @@ const GetControlType = (item: R4.IQuestionnaire_Item) => {
     }
 
     if (coding?.code === EXTENSION_SLIDER) {
-      return 'number'
+      return 'integer'
     }
   }
 
