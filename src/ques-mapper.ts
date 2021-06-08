@@ -61,19 +61,18 @@ export const FhirJsonForm = (
           ALL_PROPERTIES[groupProperty]['required'].push(myProperty)
         }
 
-        if (GetWidget(groupItem) !== '') {
-          UISchema[groupProperty][myProperty] = {
-            'ui:widget': GetWidget(groupItem),
-          };
+        UISchema[groupProperty][myProperty] = {};
+
+        const uiWidget = GetWidget(groupItem)
+        if (uiWidget !== '') {
+          UISchema[groupProperty][myProperty]['ui:widget'] = uiWidget;
         }
         
         const uiOptions = GetUIOptions(groupItem)
-        if (uiOptions !== '') {
-          UISchema[groupProperty][myProperty] = {
-            'ui:options': uiOptions,
-          };
+        if (uiOptions && Object.keys(uiOptions).length) {
+          UISchema[groupProperty][myProperty]['ui:options'] = uiOptions;
 
-          if (uiOptions.unit) {
+          if (uiOptions?.unit) {
             UISchema[groupProperty][myProperty]['ui:placeholder'] = uiOptions.unit
           }
         }
@@ -89,17 +88,16 @@ export const FhirJsonForm = (
         typeof item.linkId === 'undefined' ? uuid() : item.linkId.toString();
 
       ALL_PROPERTIES[myProperty] = GetItemProperties(item);
+      UISchema[myProperty] = {};
 
-      if (GetWidget(item) !== '') {
-        UISchema[myProperty] = {
-          'ui:widget': GetWidget(item),
-        };
+      const uiWidget = GetWidget(item)
+      if (uiWidget !== '') {
+        UISchema[myProperty]['ui:widget'] = uiWidget;
       }
 
-      if (GetUIOptions(item) !== '') {
-        UISchema[myProperty] = {
-          'ui:options': GetUIOptions(item),
-        };
+      const uiOptions = GetUIOptions(item)
+      if (uiOptions && Object.keys(uiOptions).length) {
+        UISchema[myProperty]['ui:options'] = uiOptions;
       }
 
       fhirQuestionnaireResponse.item?.push(CreateResponseItem(item));
@@ -216,7 +214,8 @@ const GetWidget = (item: R4.IQuestionnaire_Item) => {
   }
   if (
     item.type == R4.Questionnaire_ItemTypeKind._choice ||
-    item.type == R4.Questionnaire_ItemTypeKind._openChoice
+    item.type == R4.Questionnaire_ItemTypeKind._openChoice ||
+    item.type == R4.Questionnaire_ItemTypeKind._integer
   ) {
     const ext: R4.IExtension = (item.extension || [])[0]
     const coding: R4.ICoding = (ext?.valueCodeableConcept?.coding || [])[0]
@@ -231,18 +230,39 @@ const GetWidget = (item: R4.IQuestionnaire_Item) => {
   return '';
 };
 
+type TUIOptions = {
+  unit?: string
+  step?: number
+  min?: number
+  max?: number
+}
+
 const GetUIOptions = (item: R4.IQuestionnaire_Item) => {
-  const ext: R4.IExtension = (item.extension || [])[0]
-  const splitUrl = ext?.url?.split('/')
-  const extensionName = splitUrl && splitUrl[splitUrl.length-1]
+  const extensions = item.extension
 
-  if (ext?.valueCoding?.display && extensionName === 'questionnaire-unit') {
-    return {
-      unit: ext.valueCoding.display
+  return extensions?.reduce((uiOptions: TUIOptions, ext) => {
+    const splitUrl = ext?.url?.split('/')
+    const extensionName = splitUrl && splitUrl[splitUrl.length-1]
+
+    switch (extensionName) {
+      case 'questionnaire-unit':
+        uiOptions['unit'] = ext?.valueCoding?.display
+        break;
+      case 'questionnaire-sliderStepValue':
+        uiOptions['step'] = ext?.valueInteger
+        break;
+      case 'minValue':
+        uiOptions['min'] = ext?.valueInteger
+        break;
+      case 'maxValue':
+        uiOptions['max'] = ext?.valueInteger
+        break;
+      default:
+        break
     }
-  }
 
-  return '';
+    return uiOptions
+  }, {})
 }
 
 const GetControlType = (item: R4.IQuestionnaire_Item) => {

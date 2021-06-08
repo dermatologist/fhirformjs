@@ -14,8 +14,17 @@ describe('map', () => {
   it('maps fhir to ui', () => {
     const ff: Fform = FhirJsonForm(Testq1);
     expect(ff.uiSchema).toEqual({
-      '2': { '2.2': { 'ui:widget': 'datetime' } },
-      '3': {},
+      "1": {},
+      '2': { 
+        '2.2': { 'ui:widget': 'datetime' },
+        "2.3": {},
+        "2.4": {},
+        "sex": {},
+      },
+      '3': {
+        "3.1": {},
+        "3.2": {},
+      },
     });
   });
 });
