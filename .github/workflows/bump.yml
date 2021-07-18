@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: 12
       - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@master"
+        uses: "phips28/gh-action-bump-version@v8.0.18"
         with:
           tag-prefix: 'pre-'
         env:
