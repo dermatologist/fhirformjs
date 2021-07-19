@@ -1,33 +1,25 @@
 name: "Bump Version"
 # include major/minor/patch in commit message
-# Pull after publishing release/ branch
+# Pull after pushing to develop
 on:
   push:
     branches:
-      - "release/**"
+      - develop
 
 jobs:
   bump-version:
     name: "Bump Version on release branch"
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - name: "Checkout source code"
         uses: "actions/checkout@v2"
         with:
           ref: ${{ github.ref }}
-          
       - name: Generate changelog
         uses: charmixer/auto-changelog-action@v1
         with:
-          token: ${{ secrets.github_token }}
-
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          default_author: github_actions
-          add: '*.md'
-          
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: "cat package.json"
         run: cat ./package.json
       - name: "Setup Node.js"
@@ -37,7 +29,7 @@ jobs:
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@v8.0.18"
         with:
-          tag-prefix: 'pre-'
+          tag-prefix: ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "cat package.json"
