@@ -1,12 +1,23 @@
 # Changelog
 
-## [Unreleased](https://github.com/dermatologist/fhirformjs/tree/HEAD)
+## [v0.9.4](https://github.com/dermatologist/fhirformjs/tree/v0.9.4) (2021-07-19)
 
-[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/0.9.3...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/0.9.3...v0.9.4)
 
 **Implemented enhancements:**
 
 - Help wanted to clean up the code [\#5](https://github.com/dermatologist/fhirformjs/issues/5)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump actions/setup-node from 2.1.5 to 2.2.0 [\#25](https://github.com/dermatologist/fhirformjs/pull/25) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump husky from 6.0.0 to 7.0.0 [\#24](https://github.com/dermatologist/fhirformjs/pull/24) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump @size-limit/preset-small-lib from 4.12.0 to 5.0.1 [\#23](https://github.com/dermatologist/fhirformjs/pull/23) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump size-limit from 4.12.0 to 5.0.1 [\#22](https://github.com/dermatologist/fhirformjs/pull/22) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump typedoc from 0.20.37 to 0.21.0 [\#21](https://github.com/dermatologist/fhirformjs/pull/21) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump husky from 4.3.8 to 6.0.0 [\#20](https://github.com/dermatologist/fhirformjs/pull/20) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/setup-node from 1 to 2.1.5 [\#19](https://github.com/dermatologist/fhirformjs/pull/19) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/cache from 1 to 2.1.6 [\#18](https://github.com/dermatologist/fhirformjs/pull/18) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [0.9.3](https://github.com/dermatologist/fhirformjs/tree/0.9.3) (2021-06-08)
 
