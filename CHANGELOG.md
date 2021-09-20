@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.9.5](https://github.com/dermatologist/fhirformjs/tree/v0.9.5) (2021-09-19)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v0.9.4...v0.9.5)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump JamesIves/github-pages-deploy-action from 4.1.4 to 4.1.5 [\#30](https://github.com/dermatologist/fhirformjs/pull/30) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v0.9.4](https://github.com/dermatologist/fhirformjs/tree/v0.9.4) (2021-07-19)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/0.9.3...v0.9.4)
