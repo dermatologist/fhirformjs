@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.10.0](https://github.com/dermatologist/fhirformjs/tree/v0.10.0) (2021-09-20)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v0.9.5...v0.10.0)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump typedoc from 0.21.9 to 0.22.3 [\#31](https://github.com/dermatologist/fhirformjs/pull/31) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v0.9.5](https://github.com/dermatologist/fhirformjs/tree/v0.9.5) (2021-09-19)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v0.9.4...v0.9.5)
