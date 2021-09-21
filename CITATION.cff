@@ -32,12 +32,12 @@ preferred-citation:
   - family-names: "Sartipi"
     given-names: "Kamran"
     orcid: "https://orcid.org/0000-0002-3588-5991"
-  # doi: "10.2196/18149"
+  doi: 
   journal: "Stud Health Technol Inform"
-  month: 4
+  month: 
   start: 80
   end: 85
   title: "FHIRForm: An Open-Source Framework for the Management of Electronic Forms in Healthcare"
-  # issue: 1
+  issue: 
   volume: 257
   year: 2019
