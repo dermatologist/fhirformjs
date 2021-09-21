@@ -38,6 +38,6 @@ preferred-citation:
   start: 80
   end: 85
   title: "FHIRForm: An Open-Source Framework for the Management of Electronic Forms in Healthcare"
-  issue: 1
+  # issue: 1
   volume: 257
   year: 2019
