@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.10.2](https://github.com/dermatologist/fhirformjs/tree/v0.10.2) (2021-09-21)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v0.10.1...v0.10.2)
+
 ## [v0.10.1](https://github.com/dermatologist/fhirformjs/tree/v0.10.1) (2021-09-21)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v0.10.0...v0.10.1)
