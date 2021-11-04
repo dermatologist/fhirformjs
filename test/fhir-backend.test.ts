@@ -1,6 +1,8 @@
 import { FhirBackend } from '../src/fhir-backend'
 import { R4 } from '@ahryman40k/ts-fhir-types';
 
+jest.setTimeout(15000);
+
 describe('Testing Fhir Backend', () => {
 
     const backend = new FhirBackend('http://hapi.fhir.org/baseR4');
