@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.0](https://github.com/dermatologist/fhirformjs/tree/v2.1.0) (2021-11-03)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v2.0.0...v2.1.0)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump axios from 0.22.0 to 0.24.0 [\#39](https://github.com/dermatologist/fhirformjs/pull/39) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.0.0](https://github.com/dermatologist/fhirformjs/tree/v2.0.0) (2021-10-31)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.0...v2.0.0)
