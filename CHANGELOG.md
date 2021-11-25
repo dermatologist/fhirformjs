@@ -1,5 +1,13 @@
 # Changelog
 
+## [v2.1.1](https://github.com/dermatologist/fhirformjs/tree/v2.1.1) (2021-11-05)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v2.1.0...v2.1.1)
+
+**Merged pull requests:**
+
+- fix: increase timeout for tests [\#40](https://github.com/dermatologist/fhirformjs/pull/40) ([dermatologist](https://github.com/dermatologist))
+
 ## [v2.1.0](https://github.com/dermatologist/fhirformjs/tree/v2.1.0) (2021-11-03)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v2.0.0...v2.1.0)
