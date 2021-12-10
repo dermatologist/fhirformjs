@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.0.0](https://github.com/dermatologist/fhirformjs/tree/v3.0.0) (2021-11-25)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v2.1.1...v3.0.0)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump size-limit from 6.0.4 to 7.0.3 [\#41](https://github.com/dermatologist/fhirformjs/pull/41) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v2.1.1](https://github.com/dermatologist/fhirformjs/tree/v2.1.1) (2021-11-05)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v2.1.0...v2.1.1)
