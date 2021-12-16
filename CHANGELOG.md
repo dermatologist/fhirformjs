@@ -1,5 +1,13 @@
 # Changelog
 
+## [v4.0.0](https://github.com/dermatologist/fhirformjs/tree/v4.0.0) (2021-12-10)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v3.0.0...v4.0.0)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump @size-limit/preset-small-lib from 6.0.4 to 7.0.3 [\#44](https://github.com/dermatologist/fhirformjs/pull/44) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v3.0.0](https://github.com/dermatologist/fhirformjs/tree/v3.0.0) (2021-11-25)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v2.1.1...v3.0.0)
