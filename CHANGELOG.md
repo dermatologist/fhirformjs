@@ -1,5 +1,13 @@
 # Changelog
 
+## [v4.1.2](https://github.com/dermatologist/fhirformjs/tree/v4.1.2) (2022-01-09)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v4.1.1...v4.1.2)
+
+**Merged pull requests:**
+
+- chore\(deps\): bump actions/setup-node from 2.5.0 to 2.5.1 [\#51](https://github.com/dermatologist/fhirformjs/pull/51) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v4.1.1](https://github.com/dermatologist/fhirformjs/tree/v4.1.1) (2021-12-22)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v4.1.0...v4.1.1)
