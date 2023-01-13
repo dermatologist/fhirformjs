@@ -1,5 +1,23 @@
 # Changelog
 
+## [v1.1.2](https://github.com/dermatologist/fhirformjs/tree/v1.1.2) (2022-04-20)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.0...v1.1.2)
+
+**Merged pull requests:**
+
+- Update bump.yml [\#67](https://github.com/dermatologist/fhirformjs/pull/67) ([dermatologist](https://github.com/dermatologist))
+- chore\(deps\): bump actions/checkout from 2 to 3 [\#60](https://github.com/dermatologist/fhirformjs/pull/60) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump axios from 0.24.0 to 0.26.0 [\#57](https://github.com/dermatologist/fhirformjs/pull/57) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/setup-node from 2.5.0 to 2.5.1 [\#51](https://github.com/dermatologist/fhirformjs/pull/51) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/cache from 2.1.6 to 2.1.7 [\#47](https://github.com/dermatologist/fhirformjs/pull/47) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/setup-node from 2.4.1 to 2.5.0 [\#45](https://github.com/dermatologist/fhirformjs/pull/45) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump @size-limit/preset-small-lib from 6.0.4 to 7.0.3 [\#44](https://github.com/dermatologist/fhirformjs/pull/44) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump size-limit from 6.0.4 to 7.0.3 [\#41](https://github.com/dermatologist/fhirformjs/pull/41) ([dependabot[bot]](https://github.com/apps/dependabot))
+- fix: increase timeout for tests [\#40](https://github.com/dermatologist/fhirformjs/pull/40) ([dermatologist](https://github.com/dermatologist))
+- chore\(deps\): bump axios from 0.22.0 to 0.24.0 [\#39](https://github.com/dermatologist/fhirformjs/pull/39) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump @size-limit/preset-small-lib from 5.0.5 to 6.0.3 [\#37](https://github.com/dermatologist/fhirformjs/pull/37) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.1.0](https://github.com/dermatologist/fhirformjs/tree/v1.1.0) (2021-10-26)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.0.0...v1.1.0)
