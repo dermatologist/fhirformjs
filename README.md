@@ -52,6 +52,10 @@ console.log(backend.getQuestionnaire('2050148'))
 ```
 ### [See an example](https://github.com/dermatologist/fhir-questionnaire-render-react) :point_left:
 
+
+## Give us a star ⭐️
+If you find this project useful, give us a star. It helps others discover the project.
+
 ## Author
 
 * [Bell Eapen](https://nuchange.ca) [![Twitter Follow](https://img.shields.io/twitter/follow/beapen?style=social)](https://twitter.com/beapen)
