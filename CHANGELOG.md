@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.1.3](https://github.com/dermatologist/fhirformjs/tree/v1.1.3) (2023-01-13)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.2...v1.1.3)
+
+**Merged pull requests:**
+
+- chore\(deps-dev\): bump typedoc from 0.22.18 to 0.23.21 [\#110](https://github.com/dermatologist/fhirformjs/pull/110) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/cache from 3.0.2 to 3.0.11 [\#103](https://github.com/dermatologist/fhirformjs/pull/103) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump size-limit from 7.0.8 to 8.1.0 [\#95](https://github.com/dermatologist/fhirformjs/pull/95) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump axios from 0.26.1 to 0.27.2 [\#70](https://github.com/dermatologist/fhirformjs/pull/70) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/cache from 2.1.7 to 3.0.2 [\#65](https://github.com/dermatologist/fhirformjs/pull/65) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump JamesIves/github-pages-deploy-action from 4.1.5 to 4.3.0 [\#63](https://github.com/dermatologist/fhirformjs/pull/63) ([dependabot[bot]](https://github.com/apps/dependabot))
+
 ## [v1.1.2](https://github.com/dermatologist/fhirformjs/tree/v1.1.2) (2022-04-20)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.0...v1.1.2)
