@@ -3,7 +3,6 @@
 [![npm version](https://badge.fury.io/js/fhirformjs.svg)](https://www.npmjs.com/package/fhirformjs)
 [![npm](https://img.shields.io/npm/dt/fhirformjs)](https://www.npmjs.com/package/fhirformjs)
 [![Build](https://github.com/dermatologist/fhirformjs/workflows/CI/badge.svg)](https://nuchange.ca)
-[![Project dependencies overview(Beta)](https://david-dm.org/dermatologist/fhirformjs.svg)](https://nuchange.ca) 
 [![Known Vulnerabilities](https://snyk.io/test/github/dermatologist/fhirformjs/badge.svg)](https://www.npmjs.com/package/fhirformjs) 
 [![Documentation](https://badgen.net/badge/icon/documentation?icon=libraries&label)](https://dermatologist.github.io/fhirformjs/)
 
