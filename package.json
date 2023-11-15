@@ -62,17 +62,17 @@
     }
   ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.3",
-    "husky": "^7.0.0",
-    "size-limit": "^8.1.0",
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "husky": "^7.0.4",
+    "size-limit": "^8.2.6",
     "tsdx": "^0.14.1",
-    "tslib": "^2.2.0",
-    "typedoc": "^0.23.21",
-    "typescript": "^4.2.4"
+    "tslib": "^2.6.2",
+    "typedoc": "^0.23.28",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@ahryman40k/ts-fhir-types": "^4.0.34",
+    "@ahryman40k/ts-fhir-types": "^4.0.39",
     "axios": "^0.27.2",
-    "uuidv4": "^6.2.7"
+    "uuidv4": "^6.2.13"
   }
 }
