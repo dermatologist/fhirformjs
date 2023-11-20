@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.39",
-    "axios": "^0.27.2",
+    "axios": "^1.6.2",
     "uuidv4": "^6.2.13"
   }
 }
