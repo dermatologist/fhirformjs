@@ -44,6 +44,11 @@
       "//": "pre-commit tsdx lint"
     }
   },
+  "jest": {
+      "moduleNameMapper": {
+        "axios": "axios/dist/node/axios.cjs"
+      }
+  },
   "prettier": {
     "printWidth": 80,
     "semi": true,
@@ -62,9 +67,9 @@
     }
   ],
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^7.0.8",
+    "@size-limit/preset-small-lib": "^11.0.1",
     "husky": "^7.0.4",
-    "size-limit": "^8.2.6",
+    "size-limit": "^11.0.1",
     "tsdx": "^0.14.1",
     "tslib": "^2.6.2",
     "typedoc": "^0.23.28",
@@ -72,7 +77,8 @@
   },
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.39",
-    "axios": "^0.27.2",
+    "axios": "^1.6.2",
+    "ts-jest": "^29.1.1",
     "uuidv4": "^6.2.13"
   }
 }
