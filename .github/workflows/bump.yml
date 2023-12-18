@@ -23,7 +23,7 @@ jobs:
       - name: "cat package.json"
         run: cat ./package.json
       - name: "Setup Node.js"
-        uses: "actions/setup-node@v2.5.1"
+        uses: "actions/setup-node@v4.0.1"
         with:
           node-version: 12
       - name: "Automated Version Bump"
