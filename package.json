@@ -77,8 +77,8 @@
   },
   "dependencies": {
     "@ahryman40k/ts-fhir-types": "^4.0.39",
-    "axios": "^1.6.2",
-    "ts-jest": "^29.1.1",
+    "axios": "^1.7.7",
+    "ts-jest": "^29.2.5",
     "uuidv4": "^6.2.13"
   }
 }

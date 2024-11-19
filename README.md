@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/fhirformjs.svg)](https://www.npmjs.com/package/fhirformjs)
 [![npm](https://img.shields.io/npm/dt/fhirformjs)](https://www.npmjs.com/package/fhirformjs)
 [![Build](https://github.com/dermatologist/fhirformjs/workflows/CI/badge.svg)](https://nuchange.ca)
-[![Known Vulnerabilities](https://snyk.io/test/github/dermatologist/fhirformjs/badge.svg)](https://www.npmjs.com/package/fhirformjs) 
+[![Known Vulnerabilities](https://snyk.io/test/github/dermatologist/fhirformjs/badge.svg)](https://www.npmjs.com/package/fhirformjs)
 [![Documentation](https://badgen.net/badge/icon/documentation?icon=libraries&label)](https://dermatologist.github.io/fhirformjs/)
 
 ## About
@@ -45,7 +45,7 @@ import Form from "@rjsf/core"
 **since v0.8.0: Backend API**
 ```
 import { FhirBackend } from 'fhirformjs'
-const backend = new FhirBackend('http://hapi.fhir.org/baseR4');
+const backend = new FhirBackend('https://lforms-fhir.nlm.nih.gov/baseR4');
 console.log(backend.getTableOfContents())
 console.log(backend.getQuestionnaire('2050148'))
 ```

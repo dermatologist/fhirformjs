@@ -5,7 +5,7 @@ jest.setTimeout(15000);
 
 describe('Testing Fhir Backend', () => {
 
-    const backend = new FhirBackend('http://hapi.fhir.org/baseR4');
+    const backend = new FhirBackend('https://lforms-fhir.nlm.nih.gov/baseR4');
     beforeAll( async () => {
         await backend.initialize()
     });
