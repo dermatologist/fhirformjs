@@ -1,31 +1,34 @@
 name: "Bump Version"
 # include major/minor/patch in commit message
-# Pull after pushing to develop
+
 on:
   push:
     branches:
-      - develop
+      - "release/**"
 
 jobs:
   bump-version:
     name: "Bump Version on release branch"
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 3
     steps:
       - name: "Checkout source code"
         uses: "actions/checkout@v4"
         with:
           ref: ${{ github.ref }}
-      - name: Generate changelog
-        uses: charmixer/auto-changelog-action@v1
+      - name: "✏️ Generate release changelog"
+        uses: janheinrichmerker/action-github-changelog-generator@v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          user: dermatologist
+          maxIssues: 3
+          httpCache: true
       - name: "cat package.json"
         run: cat ./package.json
       - name: "Setup Node.js"
         uses: "actions/setup-node@v4.4.0"
         with:
-          node-version: 12
+          node-version: 18
       - name: "Automated Version Bump"
         uses: "dermatologist/gh-action-bump-version@beapen-1"
         with:

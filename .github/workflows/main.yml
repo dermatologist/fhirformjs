@@ -1,6 +1,6 @@
 name: CI
 
-on: 
+on:
   push:
     branches:
       - master
@@ -18,10 +18,10 @@ jobs:
       - name: Begin CI...
         uses: actions/checkout@v4
 
-      - name: Use Node 12
+      - name: Use Node 18
         uses: actions/setup-node@v4.4.0
         with:
-          node-version: 12.x
+          node-version: 18.x
 
       - name: Use cached node_modules
         uses: actions/cache@v4.2.3
