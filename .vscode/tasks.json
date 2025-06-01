@@ -6,7 +6,7 @@
 			"script": "start",
 			"problemMatcher": [],
 			"label": "npm: start",
-			"detail": "tsdx watch",
+			"detail": "dts watch",
 			"group": {
 				"kind": "build",
 				"isDefault": true
