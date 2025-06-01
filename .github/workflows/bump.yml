@@ -23,17 +23,13 @@ jobs:
           user: dermatologist
           maxIssues: 3
           httpCache: true
-      - name: "cat package.json"
-        run: cat ./package.json
-      - name: "Setup Node.js"
-        uses: "actions/setup-node@v4.4.0"
-        with:
-          node-version: 18
-      - name: "Automated Version Bump"
-        uses: "dermatologist/gh-action-bump-version@beapen-1"
-        with:
-          tag-prefix: ''
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "cat package.json"
-        run: cat ./package.json
+        with:
+          minor-wording:  'add,Adds,new'
+          major-wording:  'MAJOR,cut-major'
+          patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+                                            # defaulting to a patch bump.
+          rc-wording:     'RELEASE,alpha'
