@@ -16,8 +16,9 @@ jobs:
         with:
           node-version: 18
       - name: Install Dependencies
-        run: npm install --dev
-      - run: npm run docs
+        run: npm install --include=dev
+      - name: Build Docs 📚
+        run: npm run docs
       - name: Deploy Docs 🚀
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
