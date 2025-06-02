@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/dermatologist/fhirformjs/tree/HEAD)
+## [1.1.5](https://github.com/dermatologist/fhirformjs/tree/1.1.5) (2025-06-01)
 
-[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.4...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.4...1.1.5)
 
 **Merged pull requests:**
 
