@@ -34,7 +34,7 @@
     "start": "dts watch",
     "test": "dts test --verbose",
     "e2e": "dts test --verbose ./test/e2e --detectOpenHandles",
-    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs src"
+    "docs": "typedoc --html docs src"
   },
   "husky": {
     "hooks": {
@@ -77,7 +77,6 @@
     "ts-mockito": "^2.6.1",
     "tslib": "^2.6.2",
     "typedoc": "^0.28.5",
-    "typedoc-plugin-markdown": "^4.6.3",
     "typescript": "^5.3.3"
   },
   "dependencies": {
