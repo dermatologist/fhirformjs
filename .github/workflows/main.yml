@@ -40,6 +40,11 @@ jobs:
         run: npm test
         env:
           CI: true
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: dermatologist/fhirformjs
 
       - name: Build
         run: npm run build
