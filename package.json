@@ -71,7 +71,7 @@
     "@types/supertest": "^6.0.2",
     "dts-cli": "^2.0.5",
     "husky": "^9.1.7",
-    "jest-watch-typeahead": "^2.2.2",
+    "jest-watch-typeahead": "^3.0.1",
     "size-limit": "^11.2.0",
     "supertest": "^7.1.1",
     "ts-mockito": "^2.6.1",
