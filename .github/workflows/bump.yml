@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 3
     steps:
       - name: "Checkout source code"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
         with:
           ref: ${{ github.ref }}
       - name: "✏️ Generate release changelog"
@@ -24,7 +24,7 @@ jobs:
           maxIssues: 3
           httpCache: true
       - name:  'Automated Version Bump'
-        uses:  'phips28/gh-action-bump-version@master'
+        uses:  'dermatologist/gh-action-bump-version@develop'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
