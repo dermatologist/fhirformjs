@@ -24,7 +24,7 @@ jobs:
           maxIssues: 3
           httpCache: true
       - name:  'Automated Version Bump'
-        uses:  'phips28/gh-action-bump-version@master'
+        uses:  'dermatologist/gh-action-bump-version@develop'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
