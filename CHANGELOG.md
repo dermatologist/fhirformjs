@@ -1,5 +1,26 @@
 # Changelog
 
+## [Unreleased](https://github.com/dermatologist/fhirformjs/tree/HEAD)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/1.1.6...HEAD)
+
+**Merged pull requests:**
+
+- chore: update action for automated version bump to use dermatologist'… [\#218](https://github.com/dermatologist/fhirformjs/pull/218) ([dermatologist](https://github.com/dermatologist))
+- chore\(deps\): bump JamesIves/github-pages-deploy-action from 4.7.3 to 4.7.4 [\#217](https://github.com/dermatologist/fhirformjs/pull/217) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/setup-node from 5.0.0 to 6.0.0 [\#216](https://github.com/dermatologist/fhirformjs/pull/216) ([dependabot[bot]](https://github.com/apps/dependabot))
+- feat: add Codecov integration and update test coverage command [\#214](https://github.com/dermatologist/fhirformjs/pull/214) ([dermatologist](https://github.com/dermatologist))
+- chore\(deps\): bump actions/cache from 4.2.4 to 4.3.0 [\#213](https://github.com/dermatologist/fhirformjs/pull/213) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/setup-node from 4.4.0 to 5.0.0 [\#212](https://github.com/dermatologist/fhirformjs/pull/212) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/cache from 4.2.3 to 4.2.4 [\#211](https://github.com/dermatologist/fhirformjs/pull/211) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps\): bump actions/checkout from 4 to 5 [\#210](https://github.com/dermatologist/fhirformjs/pull/210) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump jest-watch-typeahead from 2.2.2 to 3.0.1 [\#209](https://github.com/dermatologist/fhirformjs/pull/209) ([dependabot[bot]](https://github.com/apps/dependabot))
+- chore\(deps-dev\): bump @types/jest from 29.5.14 to 30.0.0 [\#208](https://github.com/dermatologist/fhirformjs/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [1.1.6](https://github.com/dermatologist/fhirformjs/tree/1.1.6) (2025-06-02)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/1.1.5...1.1.6)
+
 ## [1.1.5](https://github.com/dermatologist/fhirformjs/tree/1.1.5) (2025-06-01)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.4...1.1.5)
@@ -30,10 +51,6 @@
 ## [v1.1.3](https://github.com/dermatologist/fhirformjs/tree/v1.1.3) (2023-01-13)
 
 [Full Changelog](https://github.com/dermatologist/fhirformjs/compare/v1.1.2...v1.1.3)
-
-**Merged pull requests:**
-
-- chore\(deps-dev\): bump typedoc from 0.22.18 to 0.23.21 [\#110](https://github.com/dermatologist/fhirformjs/pull/110) ([dependabot[bot]](https://github.com/apps/dependabot))
 
 ## [v1.1.2](https://github.com/dermatologist/fhirformjs/tree/v1.1.2) (2022-04-20)
 
