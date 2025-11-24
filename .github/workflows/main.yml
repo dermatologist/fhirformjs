@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: Begin CI...
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Use Node 18
         uses: actions/setup-node@v6.0.0
