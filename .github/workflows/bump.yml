@@ -10,7 +10,7 @@ jobs:
   bump-version:
     name: "Bump Version on release branch"
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
       - name: "Checkout source code"
         uses: "actions/checkout@v6"
@@ -21,16 +21,21 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           user: dermatologist
-          maxIssues: 3
+          maxIssues: 15
           httpCache: true
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          add: '*.md'
       - name:  'Automated Version Bump'
         uses:  'dermatologist/gh-action-bump-version@develop'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          minor-wording:  'add,Adds,new'
-          major-wording:  'MAJOR,cut-major'
-          patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+          minor-wording:  'add,Adds,new,feat,feature,Feature,update,Update,improve,Improve,fix,Fix,fixes'
+          major-wording:  'MAJOR,cut-major,major,breaking'
+          patch-wording:  'patch,chore,refactor,docs'     # Providing patch-wording will override commits
                                             # defaulting to a patch bump.
           rc-wording:     'RELEASE,alpha'
-          tag-prefix:    'v' #Prefix avoids conflict with git-flow tagging
+          skip-tag:       'true' # Tag creation is handled in another workflow
