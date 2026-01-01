@@ -2,10 +2,11 @@
 
 ## [Unreleased](https://github.com/dermatologist/fhirformjs/tree/HEAD)
 
-[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/1.2.0...HEAD)
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/1.2.1...HEAD)
 
 **Merged pull requests:**
 
+- chore: add permissions for trusted publishing in workflow [\#226](https://github.com/dermatologist/fhirformjs/pull/226) ([dermatologist](https://github.com/dermatologist))
 - chore: update bump workflow timeout and max issues; modify publish no… [\#225](https://github.com/dermatologist/fhirformjs/pull/225) ([dermatologist](https://github.com/dermatologist))
 - chore\(deps\): bump actions/cache from 4.3.0 to 5.0.1 [\#223](https://github.com/dermatologist/fhirformjs/pull/223) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps\): bump actions/setup-node from 6.0.0 to 6.1.0 [\#222](https://github.com/dermatologist/fhirformjs/pull/222) ([dependabot[bot]](https://github.com/apps/dependabot))
@@ -20,6 +21,10 @@
 - chore\(deps\): bump actions/checkout from 4 to 5 [\#210](https://github.com/dermatologist/fhirformjs/pull/210) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps-dev\): bump jest-watch-typeahead from 2.2.2 to 3.0.1 [\#209](https://github.com/dermatologist/fhirformjs/pull/209) ([dependabot[bot]](https://github.com/apps/dependabot))
 - chore\(deps-dev\): bump @types/jest from 29.5.14 to 30.0.0 [\#208](https://github.com/dermatologist/fhirformjs/pull/208) ([dependabot[bot]](https://github.com/apps/dependabot))
+
+## [1.2.1](https://github.com/dermatologist/fhirformjs/tree/1.2.1) (2026-01-01)
+
+[Full Changelog](https://github.com/dermatologist/fhirformjs/compare/1.2.0...1.2.1)
 
 ## [1.2.0](https://github.com/dermatologist/fhirformjs/tree/1.2.0) (2025-11-11)
 
